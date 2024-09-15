@@ -1,8 +1,13 @@
 {
   "Culture": "en",
   "Texts": {
-    "SamplePageMessage": "A sample page for the Crm module",
     "Menu:Crm": "Crm",
+    "Menu:Crm:Companies": "Companies",
+    "Menu:Crm:Employees": "Employees",
+
+
+
+    "SamplePageMessage": "A sample page for the Crm module",
     "Permission:Companies": "Companies",
     "Permission:Crm": "Crm",
     "Permission:Create": "Create",

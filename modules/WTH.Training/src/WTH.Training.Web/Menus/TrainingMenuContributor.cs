@@ -55,7 +55,7 @@ public class TrainingMenuContributor : IMenuContributor
         var awardsTabItem = new ApplicationMenuItem(
             TrainingMenus.Awards, 
             l["Menu:Training:Awards"], 
-            "~/Awards");
+            "~/Training/Awards");
         
         var awardsMenuItem = new ApplicationMenuItem(
             TrainingMenus.Awards, 
@@ -67,13 +67,13 @@ public class TrainingMenuContributor : IMenuContributor
             new ApplicationMenuItem(
                 TrainingMenus.AwardTypes,
                 l["Menu:Training:Awards:Types"], 
-                "~/AwardTypes",
+                "~/Training/AwardTypes",
                 icon: "fa-square-sliders");
         
         var awardingOrganisationsMenuItem = new ApplicationMenuItem(
             TrainingMenus.AwardingOrganisations,
             l["Menu:Training:Awards:Organisations"],
-            "~/AwardingOrganisations",
+            "~/Training/AwardingOrganisations",
             icon: "fa-building");
 
         moduleMenu.Items.Add(awardsTabItem);

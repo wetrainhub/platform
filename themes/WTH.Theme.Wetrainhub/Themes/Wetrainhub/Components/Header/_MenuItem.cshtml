@@ -1,0 +1,72 @@
+﻿@using Volo.Abp.UI.Navigation
+@using WTH.Theme.Wetrainhub.Layout
+@model ApplicationMenuItem
+@inject  IThemePageLayout PageLayout
+@{
+    var elementId = string.IsNullOrEmpty(Model.ElementId) ? string.Empty : $"id=\"{Model.ElementId}\"";
+    var cssClass = string.IsNullOrEmpty(Model.CssClass) ? string.Empty : Model.CssClass;
+    var activeCssClass = Model.Name == PageLayout.Content.MenuItemName ? "here" : "";
+    var disabled = Model.IsDisabled ? "disabled" : string.Empty;
+    var url = string.IsNullOrEmpty(Model.Url) ? "#" : Url.IsLocalUrl(Model.Url) ? Url.Content(Model.Url.EnsureStartsWith('~')) : Model.Url;
+    var customComponentType = Model.GetComponentTypeOrDefault();
+}
+@if (Model.IsLeaf)
+{
+    if (customComponentType != null && typeof(ViewComponent).IsAssignableFrom(customComponentType))
+    {
+        @(await Component.InvokeAsync(customComponentType))
+    }
+    else if (Model.Url != null)
+    {
+        <a href="@url"
+           class="menu-link py-3 @cssClass @disabled @activeCssClass"
+           target="@Model.Target"
+           @Html.Raw(elementId)>
+
+                @if (Model.Icon != null)
+                {
+                    if (Model.Icon.StartsWith("fa"))
+                    {
+                        <span class="menu-icon">
+                            <i class="fal @Model.Icon fs-2"></i>
+                        </span>
+                    }
+                }
+                <span class="menu-title">@Model.DisplayName</span>
+           
+        </a>
+    }
+}
+else
+{
+<div data-kt-menu-trigger="{default:'click', lg: 'hover'}" data-kt-menu-placement="right-start" class="menu-item menu-lg-down-accordion">
+
+@if (customComponentType != null && typeof(ViewComponent).IsAssignableFrom(customComponentType))
+        {
+            @(await Component.InvokeAsync(customComponentType))
+        }
+        else
+        {
+            <span class="menu-link py-3">
+                
+                @if (!Model.Icon.IsNullOrEmpty())
+                {
+                    <span class="menu-icon">
+                        <i class="fal @Model.Icon fs-2"></i>
+                    </span>
+                }
+                <span class="menu-title">@Model.DisplayName</span>
+                <span class="menu-arrow"></span>
+            </span>
+
+
+    <div class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown menu-active-bg px-lg-2 py-lg-4 w-lg-225px">
+
+    @foreach (var childMenuItem in Model.Items)
+                {
+                    @await Html.PartialAsync("~/Themes/Wetrainhub/Components/Header/_MenuItem.cshtml", childMenuItem)
+                }
+            </div>
+        }
+    </div>
+}

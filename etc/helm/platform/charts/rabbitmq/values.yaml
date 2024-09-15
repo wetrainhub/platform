@@ -1,0 +1,6 @@
+image:
+  repository: "rabbitmq"
+  tag: "3.12.7-management-alpine"
+ports:
+  http: 15672
+  amqp: 5672

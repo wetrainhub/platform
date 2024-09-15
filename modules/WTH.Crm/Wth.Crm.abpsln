@@ -1,0 +1,9 @@
+{
+  "id": "d259e9e3-1a56-4e73-817d-c06bd2555498",
+  "template": "empty",
+  "modules": {
+    "Wth.Crm": {
+      "path": "Wth.Crm.abpmdl"
+    }
+  }
+}

@@ -1,0 +1,6 @@
+apiVersion: v2
+name: webpublic
+appVersion: "1.0"
+description: Platform Public Web Application
+version: 1.0.0
+type: application

@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <RootNamespace>Wth.Crm</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.Ddd.Application" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.AutoMapper" Version="8.3.0" />
+    <ProjectReference Include="..\Wth.Crm.Application.Contracts\Wth.Crm.Application.Contracts.csproj" />
+    <ProjectReference Include="..\Wth.Crm.Domain\Wth.Crm.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

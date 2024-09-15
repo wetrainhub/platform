@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ext="clr-namespace:WTH.Platform.Maui.Extensions"
+             x:Class="WTH.Platform.Maui.MainPage"
+             Title="{ext:Translate Home}">
+    
+    <ScrollView>
+        <VerticalStackLayout
+            StyleClass="Max720"
+            Spacing="6" 
+            Padding="30,16">
+
+            <Label HorizontalOptions="Center" Text="{ext:Translate Welcome,StringFormat='{0}!'}" FontAttributes="Bold" FontSize="24" />
+            <Label 
+                x:Name= "lab1"
+                Text="{ext:Translate LongWelcomeMessage}"
+                SemanticProperties.HeadingLevel="Level2"
+                HorizontalOptions="Center"
+                HorizontalTextAlignment="Center"
+                FontSize="18" />
+
+            <Image Source="welcome.png" Margin="0,16" HorizontalOptions="Center" MaximumWidthRequest="320" />
+
+            <Button IsVisible="{Binding CurrentUser.IsAuthenticated}" Text="{ext:Translate SeeAllUsers}" Command="{Binding SeeAllUsersCommand}" MaximumWidthRequest="320" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

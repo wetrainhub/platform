@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <RootNamespace>Wth.Crm</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.Ddd.Application.Contracts" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.Authorization.Abstractions" Version="8.3.0" />
+    <ProjectReference Include="..\Wth.Crm.Domain.Shared\Wth.Crm.Domain.Shared.csproj" />
+  </ItemGroup>
+
+</Project>

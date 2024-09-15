@@ -1,0 +1,62 @@
+<svg width="245" height="245" viewBox="0 0 245 245" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Group 36278">
+<g id="Group 36277">
+<mask id="mask0_134_1412" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="245" height="245">
+<g id="clipPath1535">
+<path id="path1533" d="M0.664062 0.663086H244.003V244.002H0.664062V0.663086Z" fill="white"/>
+</g>
+</mask>
+<g mask="url(#mask0_134_1412)">
+<g id="g1531">
+<g id="g1537">
+<path id="path1539" d="M240.442 110.035H183.295" stroke="#BEBEBE" stroke-width="7.12906" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<g id="g1541">
+<path id="path1543" d="M134.337 209.799V225.219C134.337 227.654 136.311 229.628 138.746 229.628H167.762" stroke="#BEBEBE" stroke-width="7.12906" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<g id="g1545">
+<path id="path1547" d="M163.969 229.628H236.032C238.467 229.628 240.441 227.654 240.441 225.219V89.2837C240.441 86.8484 238.467 84.8741 236.032 84.8741H183.959" stroke="#BEBEBE" stroke-width="7.12906" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<g id="g1549">
+<path id="path1551" d="M58.6668 110.035H4.23312" stroke="#BEBEBE" stroke-width="7.12906" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<g id="g1553">
+<path id="path1555" d="M58.6636 84.8731H45.836" stroke="#BEBEBE" stroke-width="7.12906" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<g id="g1557">
+<path id="path1559" d="M46.777 84.8741H8.6422C6.20739 84.8741 4.23312 86.8484 4.23312 89.2837V225.219C4.23312 227.654 6.20739 229.628 8.6422 229.628H105.931C108.366 229.628 110.341 227.654 110.341 225.219V209.799" stroke="#BEBEBE" stroke-width="7.12906" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<g id="g1561">
+<path id="path1563" d="M179.376 70.6895H59.8231" stroke="#BEBEBE" stroke-width="7.12906" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<g id="g1565">
+<path id="path1567" d="M158.323 41.5892H64.9223C62.1063 41.5892 59.8231 43.8724 59.8231 46.6889V167.053" stroke="#BEBEBE" stroke-width="7.12906" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<g id="g1569">
+<path id="path1571" d="M182.54 94.1648V46.6896C182.54 43.8731 180.257 41.5899 177.44 41.5899H158.107" stroke="#BEBEBE" stroke-width="7.12906" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<g id="g1573">
+<path id="path1575" d="M59.8231 163.976V203.907C59.8231 206.723 62.1063 209.006 64.9228 209.006H177.443C180.26 209.006 182.543 206.723 182.543 203.907V92.7481" stroke="#BEBEBE" stroke-width="7.12906" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<g id="g1593">
+<path id="path1595" d="M77.9353 56.1092H77.9804" stroke="#BEBEBE" stroke-width="7.12906" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<g id="g1597">
+<path id="path1599" d="M77.9353 56.1107H77.9794" stroke="#BEBEBE" stroke-width="7.12906" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<g id="g1601">
+<path id="path1603" d="M88.7182 56.1107H88.7624" stroke="#BEBEBE" stroke-width="7.12906" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<g id="g1605">
+<path id="path1607" d="M99.507 56.1107H99.5512" stroke="#BEBEBE" stroke-width="7.12906" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+</g>
+</g>
+</g>
+<g id="Add User">
+<path id="Fill 1" opacity="0.8" d="M145.474 133.821H142.415V130.83C142.415 129.553 141.391 128.512 140.129 128.512C138.87 128.512 137.843 129.553 137.843 130.83V133.821H134.789C133.527 133.821 132.503 134.862 132.503 136.139C132.503 137.416 133.527 138.457 134.789 138.457H137.843V141.451C137.843 142.728 138.87 143.769 140.129 143.769C141.391 143.769 142.415 142.728 142.415 141.451V138.457H145.474C146.733 138.457 147.76 137.416 147.76 136.139C147.76 134.862 146.733 133.821 145.474 133.821Z" fill="#BEBEBE"/>
+<path id="Fill 4" d="M115.978 147.623C105.691 147.623 96.9071 149.268 96.9071 155.839C96.9071 162.408 105.637 164.112 115.978 164.112C126.263 164.112 135.049 162.467 135.049 155.896C135.049 149.324 126.319 147.623 115.978 147.623Z" fill="#BEBEBE"/>
+<path id="Fill 7" opacity="0.6" d="M115.982 141.364C122.986 141.364 128.601 135.677 128.601 128.582C128.601 121.487 122.986 115.798 115.982 115.798C108.977 115.798 103.363 121.487 103.363 128.582C103.363 135.677 108.977 141.364 115.982 141.364Z" fill="#BEBEBE"/>
+</g>
+</g>
+</svg>

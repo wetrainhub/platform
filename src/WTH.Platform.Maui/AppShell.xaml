@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="WTH.Platform.Maui.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ext="clr-namespace:WTH.Platform.Maui.Extensions"
+    xmlns:local="clr-namespace:WTH.Platform.Maui"
+    xmlns:pages="clr-namespace:WTH.Platform.Maui.Pages"
+    xmlns:viewModels="clr-namespace:WTH.Platform.Maui.ViewModels"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:u="http://schemas.enisn-projects.io/dotnet/maui/uraniumui"
+    
+    Shell.FlyoutBehavior="{OnIdiom Desktop=Locked, Default=Flyout}"
+    FlyoutBackgroundColor="{AppThemeBinding Light={StaticResource BackgroundHighLight}, Dark={StaticResource BackgroundHighDark}}"
+    x:DataType="viewModels:ShellViewModel">
+    <Shell.Behaviors>
+        <toolkit:StatusBarBehavior
+            StatusBarColor="{AppThemeBinding Light={StaticResource BackgroundHighLight}, Dark={StaticResource BackgroundHighDark}}"
+            StatusBarStyle="{AppThemeBinding Light=DarkContent,Dark=LightContent}"/>
+        <toolkit:EventToCommandBehavior EventName="Appearing" Command="{Binding UpdatePermissionsCommand}" />
+    </Shell.Behaviors>
+    <Shell.Resources>
+        <ResourceDictionary>
+            <toolkit:InvertedBoolConverter x:Key="InvertedBoolConverter" />
+        </ResourceDictionary>
+    </Shell.Resources>
+
+    <Shell.FlyoutHeader>
+        <Grid RowDefinitions="*,Auto" HeightRequest="{Binding HeightRequest, Source={x:Reference headerStack}}">
+            <StackLayout IsVisible="{Binding CurrentUser.IsAuthenticated}"
+                         HorizontalOptions="Start" Padding="16" Margin="0,20,0,0"
+                         Spacing="6" x:Name="headerStack">
+
+                <toolkit:AvatarView HeightRequest="60" WidthRequest="60" CornerRadius="30"
+                                    ImageSource="{Binding ProfileImageUrl}"
+                                    HorizontalOptions="Start"/>
+
+                <Label Text="{Binding CurrentUserName}" FontSize="Medium" />
+                <Label Text="{Binding CurrentUser.Email}" FontSize="Small" StyleClass="muted" />
+            </StackLayout>
+
+            <BoxView Grid.Row="1" HeightRequest="1" Margin="0" />
+        </Grid>
+    </Shell.FlyoutHeader>
+
+    <FlyoutItem Title="{ext:Translate Home}" Icon="{FontImageSource FontFamily=MaterialOutlined, Glyph={x:Static u:MaterialOutlined.Home}, Color={AppThemeBinding Light={StaticResource ForegroundDark}, Dark={StaticResource ForegroundLight}}}">
+        <Tab>
+            <ShellContent Route="home"
+            ContentTemplate="{DataTemplate local:MainPage}" />
+        </Tab>
+    </FlyoutItem>
+
+    <FlyoutItem Title="{ext:Translate Users}" IsVisible="{Binding HasUsersPermission}"
+                Icon="{FontImageSource FontFamily=MaterialOutlined, Glyph={x:Static u:MaterialOutlined.Person}, Color={AppThemeBinding Light={StaticResource ForegroundDark}, Dark={StaticResource ForegroundLight}}}">
+        <Tab>
+            <ShellContent Route="users"
+            ContentTemplate="{DataTemplate pages:IdentityUserPage}"/>
+        </Tab>
+    </FlyoutItem>
+
+    <FlyoutItem Title="{ext:Translate Tenants}" IsVisible="{Binding HasTenantsPermission}"
+                Icon="{FontImageSource FontFamily=MaterialOutlined, Glyph={x:Static u:MaterialOutlined.Badge}, Color={AppThemeBinding Light={StaticResource ForegroundDark}, Dark={StaticResource ForegroundLight}}}">
+        <Tab>
+            <ShellContent Route="tenants"
+            ContentTemplate="{DataTemplate pages:TenantsPage}"/>
+        </Tab>
+    </FlyoutItem>
+
+    <FlyoutItem Title="{ext:Translate Settings}"
+                Icon="{FontImageSource FontFamily=MaterialOutlined, Glyph={x:Static u:MaterialOutlined.Settings}, Color={AppThemeBinding Light={StaticResource ForegroundDark}, Dark={StaticResource ForegroundLight}}}">
+        <Tab>
+            <ShellContent 
+            ContentTemplate="{DataTemplate pages:SettingsPage}"/>
+        </Tab>
+    </FlyoutItem>
+
+    <FlyoutItem Title="{ext:Translate SignIn}" IsVisible="{Binding CurrentUser.IsAuthenticated,Converter={StaticResource InvertedBoolConverter}}">
+        <FlyoutItem.Icon>
+            <FontImageSource FontFamily="MaterialRegular" Glyph="{x:Static u:MaterialRegular.Login}" Color="{AppThemeBinding Light={StaticResource ForegroundDark}, Dark={StaticResource ForegroundLight}}" />
+        </FlyoutItem.Icon>
+        <Tab>
+            <ShellContent 
+                ContentTemplate="{DataTemplate pages:LoginOrLogoutPage}"/>
+        </Tab>
+    </FlyoutItem>
+
+    <FlyoutItem Title="{ext:Translate SignOut}" IsVisible="{Binding CurrentUser.IsAuthenticated}">
+        <FlyoutItem.Icon>
+            <FontImageSource FontFamily="MaterialRegular" Glyph="{x:Static u:MaterialRegular.Logout}" Color="{AppThemeBinding Light={StaticResource ForegroundDark}, Dark={StaticResource ForegroundLight}}" />
+        </FlyoutItem.Icon>
+        <Tab>
+            <ShellContent 
+                ContentTemplate="{DataTemplate pages:LoginOrLogoutPage}"/>
+        </Tab>
+    </FlyoutItem>
+
+</Shell>

@@ -1,0 +1,12 @@
+global:
+  hosts:
+    dbmigrator: "[RELEASE_NAME]-dbmigrator"
+    webpublic: "[RELEASE_NAME]-webpublic"
+    web: "[RELEASE_NAME]-web"
+  connectionStrings:
+    default: "Server=[RELEASE_NAME]-mysql;Port=3306;Database=Platform;Uid=root;Pwd=myPassword;"
+  dotnetEnvironment: "Staging"
+  disablePII: "false"
+  stringEncryptionDefaultPassPhrase: "XjfV5ryyg2lNkIkP"
+  abpStudioClient:
+    isLinkEnabled: "true"

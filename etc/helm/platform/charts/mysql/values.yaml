@@ -1,0 +1,5 @@
+port: 3306
+sa_password: "myPassword"
+image:
+  repository: "mysql"
+  tag: 8.0

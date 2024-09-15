@@ -1,0 +1,6 @@
+apiVersion: v2
+name: dbmigrator
+appVersion: "1.0"
+description: Platform Database Migrator
+version: 1.0.0
+type: application

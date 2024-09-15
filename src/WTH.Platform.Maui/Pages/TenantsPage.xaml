@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="WTH.Platform.Maui.Pages.TenantsPage"
+    xmlns:ext="clr-namespace:WTH.Platform.Maui.Extensions"
+    xmlns:viewModels="clr-namespace:WTH.Platform.Maui.ViewModels"
+    xmlns:saas="clr-namespace:Volo.Saas.Host.Dtos;assembly=Volo.Saas.Host.Application.Contracts"
+    xmlns:u="http://schemas.enisn-projects.io/dotnet/maui/uraniumui"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    x:Name="page"
+    x:DataType="viewModels:TenantsPageViewModel"
+    Title="{ext:Translate Tenants}">
+
+    <ContentPage.Behaviors>
+        <toolkit:EventToCommandBehavior EventName="Appearing" Command="{Binding RefreshCommand}" />
+    </ContentPage.Behaviors>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="{ext:Translate NewTenant,StringFormat='+ {0}'}"
+            Command="{Binding OpenCreateModalCommand}"
+            IconImageSource="{OnIdiom Desktop={FontImageSource FontFamily=MaterialRegular, Glyph={x:Static u:MaterialRegular.Add}}}"/>
+    </ContentPage.ToolbarItems>
+
+    <Grid RowDefinitions="Auto,*" 
+            StyleClass="Max720"
+            Padding="16,16,16,0">
+
+        <!-- Search -->
+        <Border StyleClass="AbpInputContainer" Padding="16, 0">
+            <Entry Text="{Binding Input.Filter}" ReturnCommand="{Binding RefreshCommand}" Placeholder="{ext:Translate Search}" ReturnType="Search" />
+        </Border>
+
+        <!-- List -->
+        <RefreshView Grid.Row="1"
+            IsRefreshing="{Binding IsBusy}"
+            Command="{Binding RefreshCommand}">
+
+            <CollectionView
+                ItemsSource="{Binding Items}"
+                SelectionMode="None"
+                RemainingItemsThreshold="2"
+                RemainingItemsThresholdReachedCommand="{Binding LoadMoreCommand}">
+                <CollectionView.Header>
+                    <!-- Padding from top -->
+                    <BoxView HeightRequest="16" Color="Transparent" />
+                </CollectionView.Header>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="saas:SaasTenantDto">
+                        <Grid ColumnDefinitions="*,Auto" Padding="4,0" Margin="0,8" HeightRequest="36" ColumnSpacing="10">
+                            <VerticalStackLayout Grid.Column="0" VerticalOptions="Center">
+                                <Label Text="{Binding Name}"
+                                    FontAttributes="Bold" />
+                                <Label Text="{Binding EditionName}" StyleClass="muted" />
+                            </VerticalStackLayout>
+
+                            <ImageButton Grid.Column="1" VerticalOptions="Center" HeightRequest="24" WidthRequest="24" BackgroundColor="Transparent"
+                                Command="{Binding BindingContext.ShowActionsCommand, Source={x:Reference page}}"
+                                CommandParameter="{Binding .}">
+                                <ImageButton.Source>
+                                    <FontImageSource FontFamily="MaterialRegular"
+                                        Glyph="{x:Static u:MaterialRegular.More_vert}"
+                                        Color="{AppThemeBinding Light={StaticResource ForegroundDark}, Dark={StaticResource ForegroundLight}}" />
+                                </ImageButton.Source>
+                            </ImageButton>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+
+                <CollectionView.EmptyView>
+                    <Image Source="empty.png"
+                        MaximumWidthRequest="120"
+                        MaximumHeightRequest="120"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Center"
+                        Opacity=".5"/>
+                </CollectionView.EmptyView>
+                
+                <CollectionView.Footer>
+                    <VerticalStackLayout>
+                        <ActivityIndicator HorizontalOptions="Center"
+                             IsRunning="{Binding IsLoadingMore}" IsVisible="{Binding IsLoadingMore}"
+                             Margin="20"/>
+
+                        <ContentView Margin="0,0,0,8" IsVisible="{OnIdiom Default=False, Desktop=True}" HorizontalOptions="Center">
+                            <Button IsVisible="{Binding CanLoadMore}" StyleClass="TextButton" Text="{ext:Translate LoadMore}"
+                                Command="{Binding LoadMoreCommand}"  />
+                        </ContentView>
+                    </VerticalStackLayout>
+                </CollectionView.Footer>
+            </CollectionView>
+        </RefreshView>
+    </Grid>
+</ContentPage>

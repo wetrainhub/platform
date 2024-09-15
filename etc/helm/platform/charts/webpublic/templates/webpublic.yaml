@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: "{{ .Release.Name }}-{{ .Chart.Name }}"
+spec:
+  selector:
+    matchLabels:
+      app: "{{ .Release.Name }}-{{ .Chart.Name }}"
+  template:
+    metadata:
+      labels:
+        app: "{{ .Release.Name }}-{{ .Chart.Name }}"
+    spec:
+      containers:
+      - image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        imagePullPolicy: "{{ .Values.image.pullPolicy }}"
+        name: "{{ .Release.Name }}-{{ .Chart.Name }}"
+        ports:
+        - name: "http"
+          containerPort: 80
+        env:
+        - name: "DOTNET_ENVIRONMENT"
+          value: "{{ .Values.global.dotnetEnvironment }}"
+        - name: "App__SelfUrl"
+          value: "{{ include "platform.hosts.webpublic" . }}"
+        - name: App__DisablePII
+          value: "{{ .Values.global.disablePII }}"
+        - name: "Redis__Configuration"
+          value: "{{ .Release.Name }}-redis"
+        - name: "ConnectionStrings__Default"
+          value: "{{ .Values.global.connectionStrings.default | replace "[RELEASE_NAME]" .Release.Name }}"
+        - name: "AuthServer__Authority"
+          value: "{{ include "platform.hosts.web" . }}"
+        - name: "AuthServer__MetaAddress"
+          value: "http://{{ .Release.Name }}-web"          
+        - name: "AuthServer__RequireHttpsMetadata"
+          value: "false"           
+        - name: "AuthServer__IsOnK8s"
+          value: "true" 
+        - name: "AuthServer__ClientId"
+          value: "Platform_Web_Public"
+        - name: "AuthServer__ClientSecret"
+          value: "{{ .Values.authServer.clientSecret }}"
+        - name: "StringEncryption__DefaultPassPhrase"
+          value: "{{ .Values.global.stringEncryptionDefaultPassPhrase }}"
+        - name: "AbpStudioClient__StudioUrl"
+          value: "{{ .Values.global.abpStudioClient.studioUrl }}"
+        - name: "AbpStudioClient__IsLinkEnabled"
+          value: "{{ .Values.global.abpStudioClient.isLinkEnabled }}"

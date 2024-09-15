@@ -1,0 +1,125 @@
+{
+  "template": "app",
+  "imports": {
+    "Volo.Abp.TextTemplateManagement": {
+      "version": "8.2.2",
+      "isInstalled": true
+    },
+    "Volo.Chat": {
+      "version": "8.2.2",
+      "isInstalled": true
+    },
+    "Volo.Abp.LanguageManagement": {
+      "version": "8.2.2",
+      "isInstalled": true
+    },
+    "Volo.FileManagement": {
+      "version": "8.2.2",
+      "isInstalled": true
+    },
+    "Volo.Abp.OpenIddict.Pro": {
+      "version": "8.2.2",
+      "isInstalled": true
+    },
+    "Volo.Abp.Gdpr": {
+      "version": "8.2.2",
+      "isInstalled": true
+    },
+    "Volo.Abp.AuditLogging.Pro": {
+      "version": "8.2.2",
+      "isInstalled": true
+    },
+    "Volo.CmsKit.Pro": {
+      "version": "8.2.2",
+      "isInstalled": true
+    },
+    "Volo.Saas": {
+      "version": "8.2.2",
+      "isInstalled": true
+    },
+    "Volo.Abp.Identity.Pro": {
+      "version": "8.2.2",
+      "isInstalled": true
+    },
+    "Volo.Abp.Account.Pro": {
+      "version": "8.2.2",
+      "isInstalled": true
+    }
+  },
+  "folders": {
+    "items": {
+      "src": {},
+      "test": {}
+    }
+  },
+  "packages": {
+    "WTH.Platform.Application": {
+      "path": "src/WTH.Platform.Application/WTH.Platform.Application.abppkg",
+      "folder": "src"
+    },
+    "WTH.Platform.Application.Tests": {
+      "path": "test/WTH.Platform.Application.Tests/WTH.Platform.Application.Tests.abppkg",
+      "folder": "test"
+    },
+    "WTH.Platform.Domain.Shared": {
+      "path": "src/WTH.Platform.Domain.Shared/WTH.Platform.Domain.Shared.abppkg",
+      "folder": "src"
+    },
+    "WTH.Platform.Application.Contracts": {
+      "path": "src/WTH.Platform.Application.Contracts/WTH.Platform.Application.Contracts.abppkg",
+      "folder": "src"
+    },
+    "WTH.Platform.HttpApi": {
+      "path": "src/WTH.Platform.HttpApi/WTH.Platform.HttpApi.abppkg",
+      "folder": "src"
+    },
+    "WTH.Platform.HttpApi.Client": {
+      "path": "src/WTH.Platform.HttpApi.Client/WTH.Platform.HttpApi.Client.abppkg",
+      "folder": "src"
+    },
+    "WTH.Platform.Web": {
+      "path": "src/WTH.Platform.Web/WTH.Platform.Web.abppkg",
+      "folder": "src"
+    },
+    "WTH.Platform.Web.Tests": {
+      "path": "test/WTH.Platform.Web.Tests/WTH.Platform.Web.Tests.abppkg",
+      "folder": "test"
+    },
+    "WTH.Platform.EntityFrameworkCore.Tests": {
+      "path": "test/WTH.Platform.EntityFrameworkCore.Tests/WTH.Platform.EntityFrameworkCore.Tests.abppkg",
+      "folder": "test"
+    },
+    "WTH.Platform.EntityFrameworkCore": {
+      "path": "src/WTH.Platform.EntityFrameworkCore/WTH.Platform.EntityFrameworkCore.abppkg",
+      "folder": "src"
+    },
+    "WTH.Platform.TestBase": {
+      "path": "test/WTH.Platform.TestBase/WTH.Platform.TestBase.abppkg",
+      "folder": "test"
+    },
+    "WTH.Platform.Domain.Tests": {
+      "path": "test/WTH.Platform.Domain.Tests/WTH.Platform.Domain.Tests.abppkg",
+      "folder": "test"
+    },
+    "WTH.Platform.HttpApi.Client.ConsoleTestApp": {
+      "path": "test/WTH.Platform.HttpApi.Client.ConsoleTestApp/WTH.Platform.HttpApi.Client.ConsoleTestApp.abppkg",
+      "folder": "test"
+    },
+    "WTH.Platform.DbMigrator": {
+      "path": "src/WTH.Platform.DbMigrator/WTH.Platform.DbMigrator.abppkg",
+      "folder": "src"
+    },
+    "WTH.Platform.Web.Public": {
+      "path": "src/WTH.Platform.Web.Public/WTH.Platform.Web.Public.abppkg",
+      "folder": "src"
+    },
+    "WTH.Platform.Maui": {
+      "path": "src/WTH.Platform.Maui/WTH.Platform.Maui.abppkg",
+      "folder": "src"
+    },
+    "WTH.Platform.Domain": {
+      "path": "src/WTH.Platform.Domain/WTH.Platform.Domain.abppkg",
+      "folder": "src"
+    }
+  }
+}

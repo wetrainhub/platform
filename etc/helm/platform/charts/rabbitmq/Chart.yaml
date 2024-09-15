@@ -1,0 +1,5 @@
+apiVersion: v2
+name: rabbitmq
+version: 1.0.0
+appVersion: "1.0"
+description: Runs RabbitMQ Message Broker Instance

@@ -1,0 +1,24 @@
+{
+  "Culture": "en",
+  "Texts": {
+    "Menu:Training": "Training",
+    "Menu:Training:Awards": "Awards",
+    "Menu:Training:Awards:Types"  : "Types",
+    "Menu:Training:Awards:Organisations": "Organisations",
+    
+    "Menu:Training:Reminders": "Reminders",
+    "Menu:Training:Reminders:Templates": "Templates",
+    
+    
+    "SamplePageMessage": "A sample page for the Training module",
+    "Permission:AwardingOrganisations": "Awarding Organisations",
+    "Permission:Training": "Training",
+    "Permission:Create": "Create",
+    "Permission:Edit": "Edit",
+    "Permission:Delete": "Delete",
+    "Permission:Awards": "Awards",
+    "Permission:AwardTypes": "Award Types",
+    "AwardType": "Award type",
+    "AwardingOrganisation": "Awarding organisation"
+  }
+}

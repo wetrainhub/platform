@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ext="clr-namespace:WTH.Platform.Maui.Extensions"
+             x:Class="WTH.Platform.Maui.Pages.TenantCreatePage"
+             xmlns:viewModels="clr-namespace:WTH.Platform.Maui.ViewModels"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:DataType="viewModels:TenantCreateViewModel"
+             Title="{ext:Translate NewTenant}">
+
+    <ContentPage.Behaviors>
+        <toolkit:EventToCommandBehavior EventName="Appearing" Command="{Binding GetEditionsCommand}"/>
+    </ContentPage.Behaviors>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <toolkit:IsEqualConverter x:Key="IsEqualConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="{ext:Translate Cancel}" Command="{Binding CancelCommand}"/>
+    </ContentPage.ToolbarItems>
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="20">
+
+            <Border StyleClass="AbpInputContainer">
+                <VerticalStackLayout>
+                    <Label Text="{ext:Translate TenantName}" />
+                    <Entry Text="{Binding Tenant.Name}" />
+                </VerticalStackLayout>
+            </Border>
+
+            <Border StyleClass="AbpInputContainer">
+                <VerticalStackLayout>
+                    <Label Text="{ext:Translate Edition}" />
+                    <Picker ItemsSource="{Binding Editions}" SelectedItem="{Binding SelectedEdition}" ItemDisplayBinding="{Binding DisplayName}" />
+                </VerticalStackLayout>
+            </Border>
+            
+            <Border StyleClass="AbpInputContainer">
+                <VerticalStackLayout>
+                    <Label Text="{ext:Translate DisplayName:AdminEmailAddress}" />
+                    <Entry Text="{Binding Tenant.AdminEmailAddress}" />
+                </VerticalStackLayout>
+            </Border>
+
+            <Border StyleClass="AbpInputContainer">
+                <VerticalStackLayout>
+                    <Label Text="{ext:Translate DisplayName:AdminPassword}" />
+                    <Entry Text="{Binding Tenant.AdminPassword}" IsPassword="True" />
+                </VerticalStackLayout>
+            </Border>
+
+            <Border StyleClass="AbpInputContainer">
+                <VerticalStackLayout>
+                    <Label Text="{ext:Translate DisplayName:ActivationState}" />
+                    <Picker x:Name="activationState" ItemsSource="{Binding ActivationStates}" SelectedItem="{Binding Tenant.ActivationState}" />
+                </VerticalStackLayout>
+            </Border>
+
+            <Border StyleClass="AbpInputContainer" IsVisible="{Binding SelectedIndex, Source={x:Reference activationState}, Converter={StaticResource IsEqualConverter}, ConverterParameter={x:Int32 1}}">
+                <VerticalStackLayout>
+                    <Label Text="{ext:Translate DisplayName:ActivationEndDate}" />
+                    <DatePicker Date="{Binding Tenant.ActivationEndDate}"/>
+                </VerticalStackLayout>
+            </Border>
+            
+            <Grid>
+                <Button Text="{ext:Translate Save}" Command="{Binding CreateCommand}" />
+                <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" />
+            </Grid>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

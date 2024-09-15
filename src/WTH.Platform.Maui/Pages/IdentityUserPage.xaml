@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="WTH.Platform.Maui.Pages.IdentityUserPage"
+    xmlns:ext="clr-namespace:WTH.Platform.Maui.Extensions"
+    xmlns:viewModels="clr-namespace:WTH.Platform.Maui.ViewModels"
+    xmlns:identity="clr-namespace:Volo.Abp.Identity;assembly=Volo.Abp.Identity.Pro.Application.Contracts"
+    xmlns:u="http://schemas.enisn-projects.io/dotnet/maui/uraniumui"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    x:Name="page"
+    x:DataType="viewModels:IdentityUserPageViewModel"
+    Title="{ext:Translate Users}">
+    <ContentPage.Behaviors>
+        <toolkit:EventToCommandBehavior EventName="Appearing" Command="{Binding RefreshCommand}" />
+    </ContentPage.Behaviors>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="{ext:Translate NewUser,StringFormat='+ {0}'}"
+            Command="{Binding OpenCreateModalCommand}"
+            IconImageSource="{OnIdiom Desktop={FontImageSource FontFamily=MaterialRegular, Glyph={x:Static u:MaterialRegular.Add}}}"/>
+    </ContentPage.ToolbarItems>
+
+    <Grid RowDefinitions="Auto,*" Padding="16,16,16,0">
+
+        <!-- Search -->
+        <Frame StyleClass="AbpInputContainer" Padding="16, 0">
+            <Entry Text="{Binding Input.Filter}" ReturnCommand="{Binding RefreshCommand}" Placeholder="{ext:Translate Search}" ReturnType="Search"/>
+        </Frame>
+
+        <RefreshView Grid.Row="1"
+            IsRefreshing="{Binding IsBusy}"
+            Command="{Binding RefreshCommand}">
+
+            <CollectionView
+                ItemsSource="{Binding Items}"
+                SelectionMode="None">
+                <CollectionView.Header>
+                    <BoxView HeightRequest="16" Color="Transparent" />
+                </CollectionView.Header>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="identity:IdentityUserDto">
+                        <Grid ColumnDefinitions="Auto,*,Auto" Padding="4,0" Margin="0,8" ColumnSpacing="10">
+                            <toolkit:AvatarView VerticalOptions="Center" BorderWidth="0">
+                                <toolkit:AvatarView.ImageSource>
+                                    <MultiBinding
+                                        StringFormat="{}{0}/api/account/profile-picture-file/{1}">
+                                        <Binding Path="BindingContext.AbpAccountPublicUrl"
+                                            Source="{x:Reference page}" />
+                                        <Binding Path="Id" />
+                                    </MultiBinding>
+                                </toolkit:AvatarView.ImageSource>
+                            </toolkit:AvatarView>
+
+                            <VerticalStackLayout Grid.Column="1" VerticalOptions="Center">
+                                <Label Text="{Binding UserName, StringFormat='@{0}'}"
+                                    FontAttributes="Bold" />
+                                <Label Text="{Binding Email}" StyleClass="muted" />
+                            </VerticalStackLayout>
+
+                            <ImageButton Grid.Column="2" VerticalOptions="Center" Margin="0,16"
+                                Command="{Binding BindingContext.ShowActionsCommand, Source={x:Reference page}}"
+                                CommandParameter="{Binding .}" HeightRequest="24">
+                                <ImageButton.Source>
+                                    <FontImageSource FontFamily="MaterialRegular"
+                                        Glyph="{x:Static u:MaterialRegular.More_vert}"
+                                        Color="{AppThemeBinding Light={StaticResource ForegroundDark}, Dark={StaticResource ForegroundLight}}" />
+                                </ImageButton.Source>
+                            </ImageButton>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+
+                <CollectionView.EmptyView>
+                    <Image Source="empty.png" 
+                        MaximumWidthRequest="120"
+                        MaximumHeightRequest="120"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Center"
+                        Opacity=".5"/>
+                </CollectionView.EmptyView>
+
+                <CollectionView.Footer>
+                    <VerticalStackLayout>
+                        <ActivityIndicator HorizontalOptions="Center"
+                            IsRunning="{Binding IsLoadingMore}"
+                            Margin="20"/>
+
+                        <ContentView Margin="0,0,0,8" IsVisible="{OnIdiom Default=False, Desktop=True}" HorizontalOptions="Center">
+                            <Button IsVisible="{Binding CanLoadMore}"  
+                                StyleClass="TextButton" Text="{ext:Translate LoadMore}"
+                                Command="{Binding LoadMoreCommand}"/>
+                        </ContentView>
+                    </VerticalStackLayout>
+                </CollectionView.Footer>
+            </CollectionView>
+
+        </RefreshView>
+
+    </Grid>
+</ContentPage>

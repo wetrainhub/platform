@@ -1,0 +1,76 @@
+﻿@page "/Dashboard"
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Microsoft.AspNetCore.Mvc.Rendering
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Button
+@using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Card
+@using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Grid
+@using Volo.Abp.AspNetCore.Mvc.UI.Bundling.TagHelpers
+@using WTH.Platform.Localization
+@using WTH.Platform.Web.Menus
+@using Volo.Abp.AspNetCore.Mvc.UI.Layout
+@using Volo.Abp.AspNetCore.Mvc.UI.Widgets
+@using Volo.Abp.AuditLogging.Web.Pages.Shared.Components.AverageExecutionDurationPerDayWidget
+@using Volo.Abp.AuditLogging.Web.Pages.Shared.Components.ErrorRateWidget
+@inject IHtmlLocalizer<PlatformResource> L
+@inject IWidgetManager WidgetManager
+@model WTH.Platform.Web.Pages.TenantDashboardModel
+@{
+    ViewBag.PageTitle = "Dashboard";
+}
+@inject IPageLayout PageLayout
+@{
+    PageLayout.Content.Title = L["Dashboard"].Value;
+    PageLayout.Content.BreadCrumb.Add(L["Menu:Dashboard"].Value);
+    PageLayout.Content.MenuItemName = PlatformMenus.TenantDashboard;
+}
+
+@section scripts {
+    <abp-script src="/Pages/TenantDashboard.js" />
+}
+
+@section styles {
+    <abp-style src="/Pages/TenantDashboard.css" />
+}
+
+<abp-card>
+    <abp-card-body>
+        <form method="get" id="DashboardFilterForm">
+            <abp-row h-align="Center" id="datepicker" class="input-daterange">
+                <div class="col-12 col-lg-5 col-md-6 mb-3 mb-lg-0">
+                    <div class="mb-0">
+                        <div class="input-group">
+                            <span class="input-group-text">@L["Date"].Value</span>
+                            <input type="text"
+                                   class="form-control date-range-picker"
+                                   name="When"
+                                   autocomplete="off"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-2 col-md-12">
+                    <div class="d-grid gap-2">
+                        <abp-button button-type="Primary" icon="refresh" type="Submit" text="@L["Refresh"].Value"/>
+                    </div>
+                </div>
+            </abp-row>
+        </form>
+    </abp-card-body>
+</abp-card>
+
+<div id="TenantDashboardWidgetsArea" data-widget-filter="#DashboardFilterForm">
+    <abp-row class="mt-5">
+        @if (await WidgetManager.IsGrantedAsync(typeof(AuditLoggingErrorRateWidgetViewComponent)))
+        {
+            <abp-column size="_4">
+                @await Component.InvokeAsync(typeof(AuditLoggingErrorRateWidgetViewComponent))
+            </abp-column>
+        }
+        @if (await WidgetManager.IsGrantedAsync(typeof(AuditLoggingAverageExecutionDurationPerDayWidgetViewComponent)))
+        {
+            <abp-column size="_4">
+                @await Component.InvokeAsync(typeof(AuditLoggingAverageExecutionDurationPerDayWidgetViewComponent))
+            </abp-column>
+        }
+    </abp-row>
+</div>

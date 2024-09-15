@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ext="clr-namespace:WTH.Platform.Maui.Extensions"
+             xmlns:viewModels="clr-namespace:WTH.Platform.Maui.ViewModels"
+             x:Class="WTH.Platform.Maui.Pages.ProfilePicturePage"
+             xmlns:account="clr-namespace:Volo.Abp.Account;assembly=Volo.Abp.Account.Pro.Public.Application.Contracts"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:DataType="viewModels:ProfilePictureViewModel"
+             Title="{ext:Translate ProfileTab:Picture}">
+    <ContentPage.Resources>
+        <toolkit:IsEqualConverter x:Key="IsEqualConverter" />
+    </ContentPage.Resources>
+    <ContentPage.Behaviors>
+        <toolkit:EventToCommandBehavior EventName="Appearing" Command="{Binding GetProfilePictureCommand}" />
+    </ContentPage.Behaviors>
+    
+    <VerticalStackLayout Padding="20" Spacing="20">
+
+        <toolkit:AvatarView
+            HorizontalOptions="Center"
+            WidthRequest="100" HeightRequest="100" CornerRadius="50"
+            ImageSource="{Binding ProfilePictureImageSource}"/>
+
+        <VerticalStackLayout RadioButtonGroup.GroupName="Photo" RadioButtonGroup.SelectedValue="{Binding SelectedProfilePictureType}">
+
+            <RadioButton Value="{x:Static account:ProfilePictureType.None}" Content="{ext:Translate UseDefault}" />
+
+            <RadioButton Value="{x:Static account:ProfilePictureType.Gravatar}" Content="{ext:Translate UseGravatar}" />
+
+            <RadioButton Value="{x:Static account:ProfilePictureType.Image}" Content="{ext:Translate SelectNewImage}" />
+
+            <Grid Padding="8" ColumnDefinitions="*,*" ColumnSpacing="8" IsVisible="{Binding SelectedProfilePictureType, Converter={StaticResource IsEqualConverter}, ConverterParameter={x:Static account:ProfilePictureType.Image}}">
+                <Button Grid.Column="0" StyleClass="Outlined" Text="{ext:Translate TakePhoto}" Command="{Binding TakePhotoCommand}" />
+                <Button Grid.Column="1" StyleClass="Outlined" Text="{ext:Translate ChoosePhoto}" Command="{Binding ChoosePhotoCommand}" />
+            </Grid>
+        </VerticalStackLayout>
+
+        <Button Text="{ext:Translate Save}" Command="{Binding SaveCommand}" />
+    </VerticalStackLayout>
+</ContentPage>

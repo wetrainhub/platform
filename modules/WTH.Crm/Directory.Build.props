@@ -1,0 +1,6 @@
+<Project>
+    <ItemGroup>
+        <ProjectCapability Include="DynamicDependentFile" />
+        <ProjectCapability Include="DynamicFileNesting" />
+    </ItemGroup>
+</Project>

@@ -1,0 +1,16 @@
+﻿@page
+@using Microsoft.Extensions.Localization
+@using Wth.Crm.Localization
+@model Wth.Crm.Web.Pages.Crm.IndexModel
+@inject IStringLocalizer<CrmResource> L
+
+@{
+}
+
+<ul>
+  @foreach(var company in Model.SearchResults.Items)
+  {
+    <li>@company.Company.Name</li>
+  }</ul>
+  
+  

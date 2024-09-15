@@ -1,0 +1,27 @@
+﻿{
+  "applications": {
+    "Docker-Dependencies": {
+      "type": "cli",
+      "startCommand": "./up.ps1",
+      "stopCommand": "./down.ps1",
+      "workingDirectory": "../../docker",
+      "folder": "infrastructure"
+    },
+    "WTH.Platform.Maui": {
+      "type": "dotnet-project",
+      "path": "../../../src/WTH.Platform.Maui/WTH.Platform.Maui.csproj"
+    },
+    "WTH.Platform.Web.Public": {
+      "type": "dotnet-project",
+      "launchUrl": "https://localhost:44395",
+      "path": "../../../src/WTH.Platform.Web.Public/WTH.Platform.Web.Public.csproj",
+      "kubernetesService": ".*-webpublic$"
+    },
+    "WTH.Platform.Web": {
+      "type": "dotnet-project",
+      "launchUrl": "https://localhost:44355",
+      "path": "../../../src/WTH.Platform.Web/WTH.Platform.Web.csproj",
+      "kubernetesService": ".*-web$"
+    }
+  }
+}

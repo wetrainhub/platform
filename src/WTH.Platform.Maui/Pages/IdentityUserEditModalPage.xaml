@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ext="clr-namespace:WTH.Platform.Maui.Extensions"
+             xmlns:viewModels="clr-namespace:WTH.Platform.Maui.ViewModels"
+             xmlns:identity="clr-namespace:Volo.Abp.Identity;assembly=Volo.Abp.Identity.Pro.Application.Contracts"
+             x:Class="WTH.Platform.Maui.Pages.IdentityUserEditModalPage"
+             x:DataType="viewModels:IdentityUserEditViewModel"
+             Title="{ext:Translate Edit}">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="{ext:Translate Cancel}" Command="{Binding CancelCommand}"/>
+    </ContentPage.ToolbarItems>
+
+    <Grid RowDefinitions="Auto,*,Auto">
+
+        <Grid ColumnDefinitions="*,*" >
+            <Grid HeightRequest="40" HorizontalOptions="FillAndExpand">
+                <Grid.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding ShowUserInformationTabCommand}" />
+                </Grid.GestureRecognizers>
+                <Label Text="{ext:Translate UserInformation}" FontAttributes="Bold" HorizontalOptions="Center" StyleClass="muted" VerticalOptions="Center">
+                    <Label.Triggers>
+                        <DataTrigger TargetType="Label" Binding="{Binding IsUserInformationPageVisible}" Value="True">
+                            <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}"/>
+                        </DataTrigger>
+                    </Label.Triggers>
+                </Label>
+                <BoxView HorizontalOptions="Fill" HeightRequest="2" VerticalOptions="End"/>
+                <BoxView IsVisible="{Binding IsUserInformationPageVisible}" HorizontalOptions="Fill" HeightRequest="2" VerticalOptions="End" Color="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}"/>
+            </Grid>
+
+            <Grid Grid.Column="1" HeightRequest="40" HorizontalOptions="FillAndExpand">
+                <Grid.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding ShowRolesTabCommand}" />
+                </Grid.GestureRecognizers>
+                <Label Text="{ext:Translate Roles}" FontAttributes="Bold" HorizontalOptions="Center" StyleClass="muted" VerticalOptions="Center">
+                    <Label.Triggers>
+                        <DataTrigger TargetType="Label" Binding="{Binding IsRolesTabVisible}" Value="True">
+                            <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}"/>
+                        </DataTrigger>
+                    </Label.Triggers>
+                </Label>
+                <BoxView HorizontalOptions="Fill" HeightRequest="2" VerticalOptions="End"/>
+                <BoxView IsVisible="{Binding IsRolesTabVisible}" HorizontalOptions="Fill" HeightRequest="2" VerticalOptions="End" Color="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}"/>
+            </Grid>
+        </Grid>
+
+        <ScrollView Grid.Row="1">
+
+            <Grid Padding="20">
+
+                <ContentView IsVisible="{Binding IsUserInformationPageVisible}">
+                    <VerticalStackLayout Margin="0,10" Padding="0,10" Spacing="16">
+
+                        <Border StyleClass="AbpInputContainer">
+                            <VerticalStackLayout>
+                                <Label Text="{ext:Translate DisplayName:UserName}" />
+                                <Entry Text="{Binding User.UserName}" />
+                            </VerticalStackLayout>
+                        </Border>
+
+                        <Border StyleClass="AbpInputContainer">
+                            <VerticalStackLayout>
+                                <Label Text="{ext:Translate DisplayName:Name}" />
+                                <Entry Text="{Binding User.Name}" />
+                            </VerticalStackLayout>
+                        </Border>
+
+                        <Border StyleClass="AbpInputContainer">
+                            <VerticalStackLayout>
+                                <Label Text="{ext:Translate DisplayName:Name}" />
+                                <Entry Text="{Binding User.Name}" />
+                            </VerticalStackLayout>
+                        </Border>
+
+                        <Border StyleClass="AbpInputContainer">
+                            <VerticalStackLayout>
+                                <Label Text="{ext:Translate DisplayName:Surname}" />
+                                <Entry Text="{Binding User.Surname}" />
+                            </VerticalStackLayout>
+                        </Border>
+
+                        <Border StyleClass="AbpInputContainer">
+                            <VerticalStackLayout>
+                                <Label Text="{ext:Translate DisplayName:Email}" />
+                                <Entry Text="{Binding User.Email}" Keyboard="Email" />
+                            </VerticalStackLayout>
+                        </Border>
+
+                        <Border StyleClass="AbpInputContainer">
+                            <VerticalStackLayout>
+                                <Label Text="{ext:Translate DisplayName:PhoneNumber}" />
+                                <Entry Text="{Binding User.PhoneNumber}" Keyboard="Telephone" />
+                            </VerticalStackLayout>
+                        </Border>
+
+                        <HorizontalStackLayout Spacing="8">
+                            <CheckBox IsChecked="{Binding User.IsActive}"/>
+                            <Label Text="{ext:Translate DisplayName:IsActive}" VerticalTextAlignment="Center">
+                                <Label.Triggers>
+                                    <DataTrigger Binding="{Binding IsActive}" TargetType="Label" Value="True">
+                                        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}" />
+                                    </DataTrigger>
+                                </Label.Triggers>
+                            </Label>
+                        </HorizontalStackLayout>
+
+                        <HorizontalStackLayout Spacing="8">
+                            <CheckBox IsChecked="{Binding User.LockoutEnabled}"/>
+                            <Label Text="{ext:Translate DisplayName:LockoutEnabled}" VerticalTextAlignment="Center">
+                                <Label.Triggers>
+                                    <DataTrigger Binding="{Binding LockoutEnabled}" TargetType="Label" Value="True">
+                                        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}" />
+                                    </DataTrigger>
+                                </Label.Triggers>
+                            </Label>
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+                </ContentView>
+
+                <ContentView IsVisible="{Binding IsRolesTabVisible}">
+                    <Grid Padding="0,30,0,0">
+                        <ActivityIndicator IsRunning="{Binding IsRolesBusy}" VerticalOptions="Center" />
+
+                        <CollectionView ItemsSource="{Binding SelectionList}">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="viewModels:SelectionViewModel">
+                                    <HorizontalStackLayout Spacing="8">
+                                        <CheckBox IsChecked="{Binding IsSelected}" />
+                                        <Label Text="{Binding DisplayName}" VerticalTextAlignment="Center">
+                                            <Label.Triggers>
+                                                <DataTrigger Binding="{Binding IsSelected}" TargetType="Label" Value="True">
+                                                    <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}" />
+                                                </DataTrigger>
+                                            </Label.Triggers>
+                                        </Label>
+                                    </HorizontalStackLayout>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </Grid>
+                </ContentView>
+            </Grid>
+        </ScrollView>
+
+        <Grid Grid.Row="2" Margin="20,0,20,20">
+            <Button Text="{ext:Translate Save}" Command="{Binding EditCommand}" />
+            <ActivityIndicator IsRunning="{Binding IsBusy}" Color="{DynamicResource White}" />
+        </Grid>
+    </Grid>
+
+</ContentPage>

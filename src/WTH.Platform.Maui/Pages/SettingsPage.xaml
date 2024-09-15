@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ext="clr-namespace:WTH.Platform.Maui.Extensions"
+             xmlns:viewModels="clr-namespace:WTH.Platform.Maui.ViewModels"
+             x:Class="WTH.Platform.Maui.Pages.SettingsPage"
+             xmlns:u="http://schemas.enisn-projects.io/dotnet/maui/uraniumui"
+             x:DataType="viewModels:SettingsViewModel"
+             Title="{ext:Translate Settings}">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Image">
+                <Setter Property="HeightRequest" Value="24" />
+                <Setter Property="WidthRequest" Value="24" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ScrollView>
+        <VerticalStackLayout Spacing="16" Padding="16">
+
+            <ContentView>
+                <ContentView.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding ChangeLanguageCommand}" />
+                </ContentView.GestureRecognizers>
+                <Grid ColumnDefinitions="Auto,*" ColumnSpacing="20">
+                    <Frame BackgroundColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}"
+                           WidthRequest="40"
+                           Padding="0"
+                           HeightRequest="40"
+                           CornerRadius="20">
+                        <Image HorizontalOptions="Center" VerticalOptions="Center">
+                            <Image.Source>
+                                <FontImageSource FontFamily="MaterialRegular"
+                                                 Glyph="{x:Static u:MaterialRegular.Language}"
+                                                 Color="{DynamicResource White}"/>
+                            </Image.Source>
+                        </Image>
+                    </Frame>
+
+                    <VerticalStackLayout Grid.Column="1" VerticalOptions="Center">
+                        <Label Text="{ext:Translate Language}" />
+                        <Label Text="{Binding CurrentLanguage}" StyleClass="muted" />
+                    </VerticalStackLayout>
+
+                </Grid>
+            </ContentView>
+
+            <ContentView>
+                <ContentView.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding ChangeThemeCommand}" />
+                </ContentView.GestureRecognizers>
+                <Grid ColumnDefinitions="Auto,*" ColumnSpacing="20">
+                    <Frame BackgroundColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}"
+                           WidthRequest="40"
+                           Padding="0"
+                           HeightRequest="40"
+                           CornerRadius="20">
+                        <Image HorizontalOptions="Center" VerticalOptions="Center">
+                            <Image.Source>
+                                <FontImageSource FontFamily="MaterialOutlined"
+                                                 Glyph="{x:Static u:MaterialOutlined.Brightness_medium}"
+                                                 Color="{DynamicResource White}" />
+                            </Image.Source>
+                        </Image>
+                    </Frame>
+
+                    <VerticalStackLayout Grid.Column="1" VerticalOptions="Center">
+                        <Label Text="{ext:Translate Theme}" />
+                        <Label Text="{Binding CurrentTheme}" StyleClass="muted" />
+                    </VerticalStackLayout>
+
+                </Grid>
+            </ContentView>
+
+            <ContentView IsVisible="{Binding CurrentUser.IsAuthenticated}">
+                <ContentView.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding NavigateToPictureCommand}" />
+                </ContentView.GestureRecognizers>
+                <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="20">
+                    <Frame BackgroundColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}"
+                           WidthRequest="40"
+                           Padding="0"
+                           HeightRequest="40"
+                           CornerRadius="20">
+                        <Image HorizontalOptions="Center" VerticalOptions="Center">
+                            <Image.Source>
+                                <FontImageSource FontFamily="MaterialOutlined"
+                                                 Glyph="{x:Static u:MaterialOutlined.Image}"
+                                                 Color="{DynamicResource White}" />
+                            </Image.Source>
+                        </Image>
+                    </Frame>
+
+                    <VerticalStackLayout Grid.Column="1" VerticalOptions="Center">
+                        <Label Text="{ext:Translate ProfileTab:Picture}" />
+                    </VerticalStackLayout>
+
+                    <Image 
+                        Grid.Column="2"
+                        VerticalOptions="Center"
+                        HeightRequest="20"
+                        WidthRequest="20"
+                        Source="{FontImageSource FontFamily=MaterialRegular, Glyph={x:Static u:MaterialRegular.Chevron_right}, Color={AppThemeBinding Light={StaticResource ForegroundDark}, Dark={StaticResource ForegroundLight}}, Size=24}" />
+
+                </Grid>
+            </ContentView>
+
+            <ContentView IsVisible="{Binding CurrentUser.IsAuthenticated}">
+                <ContentView.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding NavigateToChangePasswordCommand}" />
+                </ContentView.GestureRecognizers>
+                <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="20">
+                    <Frame BackgroundColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}"
+                           WidthRequest="40"
+                           Padding="0"
+                           HeightRequest="40"
+                           CornerRadius="20">
+                        <Image HorizontalOptions="Center" VerticalOptions="Center">
+                            <Image.Source>
+                                <FontImageSource FontFamily="MaterialOutlined"
+                                                 Glyph="{x:Static u:MaterialOutlined.Lock}"
+                                                 Color="{DynamicResource White}" />
+                            </Image.Source>
+                        </Image>
+                    </Frame>
+
+                    <VerticalStackLayout Grid.Column="1" VerticalOptions="Center">
+                        <Label Text="{ext:Translate ProfileTab:Password}" />
+                    </VerticalStackLayout>
+
+                    <Image 
+                        Grid.Column="2"
+                        VerticalOptions="Center"
+                        HeightRequest="20"
+                        WidthRequest="20"
+                        Source="{FontImageSource FontFamily=MaterialRegular, Glyph={x:Static u:MaterialRegular.Chevron_right}, Color={AppThemeBinding Light={StaticResource ForegroundDark}, Dark={StaticResource ForegroundLight}}, Size=24}" />
+
+                </Grid>
+            </ContentView>
+
+            <ContentView IsVisible="{Binding CurrentUser.IsAuthenticated}">
+                <ContentView.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding LogoutCommand}" />
+                </ContentView.GestureRecognizers>
+                <Grid ColumnDefinitions="Auto,*" ColumnSpacing="20">
+                    <Frame BackgroundColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}"
+                           WidthRequest="40"
+                           Padding="0"
+                           HeightRequest="40"
+                           CornerRadius="20">
+                        <Image HorizontalOptions="Center" VerticalOptions="Center">
+                            <Image.Source>
+                                <FontImageSource FontFamily="MaterialOutlined"
+                                                 Glyph="{x:Static u:MaterialOutlined.Logout}"
+                                                 Color="{StaticResource White}" />
+                            </Image.Source>
+                        </Image>
+                    </Frame>
+
+                    <VerticalStackLayout Grid.Column="1" VerticalOptions="Center">
+                        <Label Text="{ext:Translate SignOut}" />
+                    </VerticalStackLayout>
+
+                </Grid>
+            </ContentView>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

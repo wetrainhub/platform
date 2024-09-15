@@ -1,0 +1,26 @@
+version: '3.7'
+  
+volumes:
+  platform_rabbitmq:
+networks:
+  platform:
+    external: true
+
+services:
+  rabbitmq:
+    container_name: rabbitmq
+    image: rabbitmq:3.12.7-management-alpine
+    volumes:
+      - platform_rabbitmq:/var/lib/rabbitmq
+    networks:
+      - platform
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+  redis:
+    container_name: redis
+    image: redis:7.2.2-alpine
+    networks:
+      - platform
+    ports:
+      - "6379:6379"

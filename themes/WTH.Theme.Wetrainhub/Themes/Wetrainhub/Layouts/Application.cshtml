@@ -1,0 +1,138 @@
+﻿@using System.Globalization
+@using Volo.Abp.AspNetCore.Mvc.UI.Bundling.TagHelpers
+@using Volo.Abp.AspNetCore.Mvc.UI.Components.LayoutHook
+@using Volo.Abp.AspNetCore.Mvc.UI.Layout
+@using WTH.Theme.Wetrainhub.Bundling
+@using Volo.Abp.AspNetCore.Mvc.UI.Theming
+@using Volo.Abp.AspNetCore.Mvc.UI.Widgets.Components.WidgetScripts
+@using Volo.Abp.AspNetCore.Mvc.UI.Widgets.Components.WidgetStyles
+@using Volo.Abp.Ui.Branding
+@using Volo.Abp.Ui.LayoutHooks
+@using WTH.Theme.Wetrainhub.Themes.Wetrainhub.Components.ContentTitle
+@using WTH.Theme.Wetrainhub.Themes.Wetrainhub.Components.Footer
+@using WTH.Theme.Wetrainhub.Themes.Wetrainhub.Components.Header
+@using WTH.Theme.Wetrainhub.Themes.Wetrainhub.Components.MainNavbar
+@using WTH.Theme.Wetrainhub.Themes.Wetrainhub.Components.PageAlerts
+@inject IBrandingProvider BrandingProvider
+@inject IPageLayout PageLayout
+@{
+    Layout = null;
+    var containerClass = ViewBag.FluidLayout == true ? "container-fluid" : "container"; //TODO: Better and type-safe options
+
+    var pageTitle = ViewBag.Title == null ? BrandingProvider.AppName : ViewBag.Title; //TODO: Discard to get from Title
+
+    if (PageLayout.Content.Title != null)
+    {
+        if (!string.IsNullOrWhiteSpace(pageTitle))
+        {
+            pageTitle = " | " + pageTitle;
+        }
+
+        pageTitle = PageLayout.Content.Title + pageTitle;
+    }
+}
+
+<!DOCTYPE html>
+
+<html lang="@CultureInfo.CurrentCulture.Name" data-bs-theme="light">
+
+<head>
+    @await Component.InvokeLayoutHookAsync(LayoutHooks.Head.First, StandardLayouts.Application)
+
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link rel="apple-touch-icon" sizes="57x57" href="/themes/wetrainhub/img/favicons/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/themes/wetrainhub/img/favicons/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/themes/wetrainhub/img/favicons/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/themes/wetrainhub/img/favicons/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/themes/wetrainhub/img/favicons/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/themes/wetrainhub/img/favicons/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/themes/wetrainhub/img/favicons/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/themes/wetrainhub/img/favicons/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/themes/wetrainhub/img/favicons/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/themes/wetrainhub/img/favicons/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/themes/wetrainhub/img/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/themes/wetrainhub/img/favicons/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/themes/wetrainhub/img/favicons/favicon-16x16.png">
+    <link rel="manifest" href="/themes/wetrainhub/img/favicons/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/themes/vuexy/img/favicons/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700"/>
+
+    <title>@pageTitle</title>
+
+    <abp-style-bundle name="@WetrainhubThemeBundles.Styles.Global"/>
+
+    @await Component.InvokeAsync(typeof(WidgetStylesViewComponent))
+
+    @await RenderSectionAsync("styles", false)
+
+    @await Component.InvokeLayoutHookAsync(LayoutHooks.Head.Last, StandardLayouts.Application)
+    <script>
+        if (window.top != window.self) { window.top.location.replace(window.self.location.href); }
+    </script>
+
+</head>
+<body id="kt_body" class="header-extended header-fixed header-tablet-and-mobile-fixed" >
+@await Component.InvokeLayoutHookAsync(LayoutHooks.Body.First, StandardLayouts.Application)
+
+<div class="d-flex flex-column flex-root">
+    <div class="page d-flex flex-row flex-column-fluid">
+        <div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
+
+            <!-- Header -->
+            @(await Component.InvokeAsync<HeaderViewComponent>())
+
+            <!-- Toolbar -->
+            <div class="toolbar py-3 py-lg-6" id="kt_toolbar">
+                <div id="kt_toolbar_container" class="container-xxl d-flex flex-stack flex-wrap gap-2">
+                    @(await Component.InvokeAsync<ContentTitleViewComponent>())
+
+                    <div class="d-flex align-items-center">
+                        @await RenderSectionAsync("content_toolbar", false)
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Container -->
+            <div id="kt_content_container" class="d-flex flex-column-fluid align-items-start container-xxl">
+                <div class="content flex-row-fluid" id="kt_content">
+
+                    @(await Component.InvokeAsync<PageAlertsViewComponent>())
+
+                    @await Component.InvokeLayoutHookAsync(LayoutHooks.PageContent.First, StandardLayouts.Application)
+                    @RenderBody()
+                    @await Component.InvokeLayoutHookAsync(LayoutHooks.PageContent.Last, StandardLayouts.Application)
+                </div>
+            </div>
+            <!-- Footer -->
+            @(await Component.InvokeAsync<FooterViewComponent>())
+
+        </div>
+    </div>
+</div>
+
+
+<script>var hostUrl = "/themes/wetrainhub/";</script>
+
+<abp-script-bundle name="@WetrainhubThemeBundles.Scripts.Global"/>
+
+<script src="~/Abp/ApplicationLocalizationScript?cultureName=@CultureInfo.CurrentUICulture.Name"></script>
+<script src="~/Abp/ApplicationConfigurationScript"></script>
+<script src="~/Abp/ServiceProxyScript"></script>
+
+@await Component.InvokeAsync(typeof(WidgetScriptsViewComponent))
+
+@await RenderSectionAsync("scripts", false)
+
+@await Component.InvokeLayoutHookAsync(LayoutHooks.Body.Last, StandardLayouts.Application)
+</body>
+</html>

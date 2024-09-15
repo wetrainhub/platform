@@ -1,0 +1,43 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <RootNamespace>WTH.Platform</RootNamespace>
+    <GenerateEmbeddedFilesManifest>true</GenerateEmbeddedFilesManifest>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.BackgroundJobs.Domain.Shared" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.AuditLogging.Domain.Shared" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.FeatureManagement.Domain.Shared" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.PermissionManagement.Domain.Shared" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.SettingManagement.Domain.Shared" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.BlobStoring.Database.Domain.Shared" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.GlobalFeatures" Version="8.3.0" />
+  <ProjectReference Include="..\..\modules\Wth.Crm\src\Wth.Crm.Domain.Shared\Wth.Crm.Domain.Shared.csproj" /><ProjectReference Include="..\..\modules\Wth.Crm\src\Wth.Crm.Domain.Shared\Wth.Crm.Domain.Shared.csproj" /><ProjectReference Include="..\..\modules\WTH.Training\src\WTH.Training.Domain.Shared\WTH.Training.Domain.Shared.csproj" /></ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.OpenIddict.Pro.Domain.Shared" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.Identity.Pro.Domain.Shared" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.LanguageManagement.Domain.Shared" Version="8.3.0" />
+    <PackageReference Include="Volo.FileManagement.Domain.Shared" Version="8.3.0" />
+    <PackageReference Include="Volo.Saas.Domain.Shared" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.TextTemplateManagement.Domain.Shared" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.Gdpr.Domain.Shared" Version="8.3.0" />
+    <PackageReference Include="Volo.Chat.Domain.Shared" Version="8.3.0" />
+    <PackageReference Include="Volo.CmsKit.Pro.Domain.Shared" Version="8.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="8.0.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Localization\Platform\*.json" />
+    <Content Remove="Localization\Platform\*.json" />
+  </ItemGroup>
+
+</Project>

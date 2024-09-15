@@ -1,0 +1,23 @@
+﻿@using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Alert
+
+@model WTH.Theme.Wetrainhub.Layout.ThemeContentLayout
+
+<div class="page-title d-flex flex-column align-items-start me-3 py-2 py-lg-0 gap-2">
+    <h1 class="d-flex text-gray-900 fw-bold m-0 fs-3">@Model.Title</h1>
+    <ul class="breadcrumb breadcrumb-dot fw-semibold text-gray-600 fs-7">
+      @foreach (var breadcrumb in Model.BreadCrumb.Items)
+      {
+          var isLast = Model.BreadCrumb.Items.IndexOf(breadcrumb) == Model.BreadCrumb.Items.Count - 1;
+          if (!isLast)
+          {
+              <li class="breadcrumb-item text-gray-600">
+                  <a href="@breadcrumb.Url" class="text-gray-600 text-hover-primary">@breadcrumb.Text</a>
+              </li>
+          }
+          else
+          {
+              <li class="breadcrumb-item text-gray-500">@breadcrumb.Text</li>
+          }
+      }
+    </ul>
+</div>

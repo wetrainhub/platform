@@ -1,10 +1,12 @@
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
 using Volo.Abp.AspNetCore.Mvc.UI.Layout;
 using WTH.Platform.Web.Menus;
 using WTH.Theme.Wetrainhub.Layout;
 
 namespace WTH.Platform.Web.Pages;
 
+[Authorize]
 public class IndexModel(IThemePageLayout themePageLayout) : PlatformPageModel
 {
     public void OnGet()

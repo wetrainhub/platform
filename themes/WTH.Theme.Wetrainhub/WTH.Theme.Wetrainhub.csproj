@@ -35,5 +35,10 @@
     <Folder Include="wwwroot\themes\wetrainhub\fontawesome\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Themes\Wetrainhub\Components\Menu\Default.cshtml" />
+    <UpToDateCheckInput Remove="Themes\Wetrainhub\Components\Menu\_MenuItem.cshtml" />
+  </ItemGroup>
+
 
 </Project>

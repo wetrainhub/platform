@@ -17,7 +17,6 @@
 @using Volo.Abp.Ui.LayoutHooks
 @using WTH.Theme.Wetrainhub.Themes.Wetrainhub.Components.PageAlerts
 
-@using WTH.Theme.Wetrainhub.Themes.Wetrainhub.Components.MainNavbar
 @inject IBrandingProvider BrandingProvider
 @inject IOptions<AbpMultiTenancyOptions> MultiTenancyOptions
 @inject ICurrentTenant CurrentTenant
@@ -57,7 +56,6 @@
 <body class="abp-account-layout @rtl">
     @await Component.InvokeLayoutHookAsync(LayoutHooks.Body.First, StandardLayouts.Account)
 
-    @(await Component.InvokeAsync<MainNavbarViewComponent>())
 
     <div class="@containerClass">
         <abp-row>

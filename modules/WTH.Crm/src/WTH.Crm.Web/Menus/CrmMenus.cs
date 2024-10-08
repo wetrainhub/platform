@@ -6,5 +6,7 @@ public class CrmMenus
 
     //Add your menu items here...
     //public const string Home = Prefix + ".MyNewMenuItem";
+    public const string Companies = Prefix + ".Companies";
+    public const string Employees = Prefix + ".Employees";
 
 }

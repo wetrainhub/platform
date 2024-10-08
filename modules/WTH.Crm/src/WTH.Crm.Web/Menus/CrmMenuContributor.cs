@@ -27,7 +27,7 @@ public class CrmMenuContributor : IMenuContributor
         var l = context.GetLocalizer<CrmResource>();
         
         var employeesMenuItem = new ApplicationMenuItem(
-            CrmMenus.Prefix,
+            CrmMenus.Employees,
             displayName: l["Menu:Crm:Employees"],
             "~/Crm/Employees",
             icon: "fa-users");
@@ -40,7 +40,7 @@ public class CrmMenuContributor : IMenuContributor
         var l = context.GetLocalizer<CrmResource>();
         
         var employeesMenuItem = new ApplicationMenuItem(
-            CrmMenus.Prefix,
+            CrmMenus.Companies,
             displayName: l["Menu:Crm:Companies"],
             "~/Crm/Companies",
             icon: "fa-building");

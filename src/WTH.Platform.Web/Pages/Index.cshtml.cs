@@ -6,7 +6,6 @@ using WTH.Theme.Wetrainhub.Layout;
 
 namespace WTH.Platform.Web.Pages;
 
-[Authorize]
 public class IndexModel(IThemePageLayout themePageLayout) : PlatformPageModel
 {
     public void OnGet()

@@ -38,7 +38,7 @@ public class PlatformMenuContributor : IMenuContributor
         context.Menu.AddItem(
             new ApplicationMenuItem(
                 PlatformMenus.HostDashboard,
-                l["Menu:Dashboard"],
+                l["Menu:HostDashboard"],
                 "~/HostDashboard",
                 icon: "fa fa-line-chart",
                 order: 2

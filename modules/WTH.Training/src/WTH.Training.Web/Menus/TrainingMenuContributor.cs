@@ -27,59 +27,59 @@ public class TrainingMenuContributor : IMenuContributor
     {
         var l = context.GetLocalizer<TrainingResource>();
         var remindersTabItem = new ApplicationMenuItem(
-            TrainingMenus.Awards, 
+            TrainingMenus.Reminders, 
             l["Menu:Training:Reminders"], 
-            "~/Reminders");
+            "~/Training/Reminders");
         
-        var remindersMenuItem = new ApplicationMenuItem(
-            TrainingMenus.Awards, 
-            l["Menu:Training:Reminders"], 
-            "~/Reminders",
+        var logsMenuItem = new ApplicationMenuItem(
+            TrainingMenus.Reminders, 
+            l["Menu:Training:Reminders:Logs"], 
+            "~/Training/Reminders/Logs",
             icon:"fa-bell-ring");
         
         var templatesMenuItem = new ApplicationMenuItem(
-            TrainingMenus.Awards, 
+            TrainingMenus.RemindersTemplates, 
             l["Menu:Training:Reminders:Templates"], 
-            "~/ReminderTemplates",
+            "~/Training/Reminders/Templates",
             icon:"fa-pen-ruler");
 
         
         moduleMenu.Items.Add(remindersTabItem);
-        remindersTabItem.Items.Add(remindersMenuItem);
+        remindersTabItem.Items.Add(logsMenuItem);
         remindersTabItem.Items.Add(templatesMenuItem);
     }
 
     private static void AddAwards(MenuConfigurationContext context, ApplicationMenuItem moduleMenu)
     {
         var l = context.GetLocalizer<TrainingResource>();
-        var awardsTabItem = new ApplicationMenuItem(
+        var certificateMenuItem = new ApplicationMenuItem(
             TrainingMenus.Awards, 
-            l["Menu:Training:Awards"], 
-            "~/Training/Awards");
+            l["Menu:Training:Certification"], 
+            "~/Training/Certification");
         
         var awardsMenuItem = new ApplicationMenuItem(
             TrainingMenus.Awards, 
-            l["Menu:Training:Awards"], 
-            "~/Awards",
+            l["Menu:Training:Certification:Awards"], 
+            "~/Training/Awards",
             icon:"fa-award");
         
         var awardTypesMenuItem =
             new ApplicationMenuItem(
                 TrainingMenus.AwardTypes,
-                l["Menu:Training:Awards:Types"], 
+                l["Menu:Training:Certification:Types"], 
                 "~/Training/AwardTypes",
                 icon: "fa-square-sliders");
         
         var awardingOrganisationsMenuItem = new ApplicationMenuItem(
             TrainingMenus.AwardingOrganisations,
-            l["Menu:Training:Awards:Organisations"],
+            l["Menu:Training:Certification:Organisations"],
             "~/Training/AwardingOrganisations",
             icon: "fa-building");
 
-        moduleMenu.Items.Add(awardsTabItem);
-        awardsTabItem.Items.Add(awardsMenuItem);
-        awardsTabItem.Items.Add(awardTypesMenuItem);
-        awardsTabItem.Items.Add(awardingOrganisationsMenuItem);
+        moduleMenu.Items.Add(certificateMenuItem);
+        certificateMenuItem.Items.Add(awardsMenuItem);
+        certificateMenuItem.Items.Add(awardTypesMenuItem);
+        certificateMenuItem.Items.Add(awardingOrganisationsMenuItem);
     }
 
     private static ApplicationMenuItem AddModuleMenuItem(MenuConfigurationContext context)

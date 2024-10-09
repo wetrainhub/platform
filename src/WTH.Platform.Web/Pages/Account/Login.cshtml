@@ -1,0 +1,188 @@
+﻿@page
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using Microsoft.Extensions.Options
+@using Owl.reCAPTCHA
+@using Owl.reCAPTCHA.v2.TagHelpers
+@using Owl.reCAPTCHA.v3.TagHelpers
+@using Volo.Abp.Account.Localization
+@using Volo.Abp.Account.Public.Web.Pages.Account
+@using Volo.Abp.Account.Public.Web.Security.Recaptcha
+@using Volo.Abp.Account.Settings
+@using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Alert
+@using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Button
+@using Volo.Abp.AspNetCore.Mvc.UI.Bundling.TagHelpers
+@using Volo.Abp.AspNetCore.Mvc.UI.Theming;
+@using Volo.Abp.Identity;
+@using Volo.Abp.Settings
+@model Volo.Abp.Account.Public.Web.Pages.Account.LoginModel
+@inject IHtmlLocalizer<AccountResource> L
+@inject IThemeManager ThemeManager
+@inject ISettingProvider SettingProvider
+
+@{
+    Layout = ThemeManager.CurrentTheme.GetAccountLayout();
+    var reCaptchaVersion = await SettingProvider.GetAsync<int>(AccountSettingNames.Captcha.Version);
+    if (Model.UseCaptcha)
+    {
+        await Model.ReCaptchaOptions.SetAsync(reCaptchaVersion == 3 ? reCAPTCHAConsts.V3 : reCAPTCHAConsts.V2);
+    }
+}
+
+@section scripts
+{
+    <abp-script-bundle name="@typeof(LoginModel).FullName">
+        <abp-script src="/Pages/Account/Login.js"/>
+    </abp-script-bundle>
+
+
+    @if (Model.UseCaptcha)
+    {
+        if (reCaptchaVersion == 3)
+        {
+            <recaptcha-script-v3/>
+            <recaptcha-script-v3-js action="login" execute="false"/>
+        }
+        else
+        {
+            <recaptcha-script-v2/>
+        }
+    }
+}
+
+<div class="d-flex flex-center flex-column flex-lg-row-fluid">
+    <!--begin::Wrapper-->
+    <div class="w-lg-500px p-10">
+        <!--begin::Form-->
+        <div class="form w-100">
+            <!--begin::Heading-->
+            <div class="text-center mb-11">
+                <!--begin::Title-->
+                <h1 class="text-gray-900 fw-bolder mb-3">Sign In</h1>
+                <!--end::Title-->
+                <!--begin::Subtitle-->
+                <div class="text-gray-500 fw-semibold fs-6">Your Social Campaigns</div>
+                <!--end::Subtitle=-->
+            </div>
+            <!--begin::Heading-->
+
+            @if (!Model.EnableLocalLogin && !Model.VisibleExternalProviders.Any())
+            {
+                <div class="alert alert-warning">
+                    <strong>@L["InvalidLoginRequest"]</strong>
+                    @L["ThereAreNoLoginSchemesConfiguredForThisClient"]
+                </div>
+            }
+
+            @if (Model.VisibleExternalProviders.Any())
+            {
+                <form asp-page="./Login" asp-page-handler="ExternalLogin"
+                      asp-route-returnUrl="@Model.ReturnUrl"
+                      asp-route-returnUrlHash="@Model.ReturnUrlHash"
+                      asp-route-linkTenantId="@Model.LinkTenantId"
+                      asp-route-linkUserId="@Model.LinkUserId"
+                      asp-route-linkToken="@Model.LinkToken"
+                      method="post">
+                    <div class="row g-3 mb-9">
+                        @foreach (var provider in Model.VisibleExternalProviders)
+                        {
+                            <button type="submit"
+                                    class="btn btn-flex btn-outline btn-text-gray-700 btn-active-color-primary bg-state-light flex-center text-nowrap w-100"
+                                    value="@provider.AuthenticationScheme"
+                                    title="@L["LogInUsingYourProviderAccount", provider.DisplayName]"
+                                    name="provider"
+                                    data-busy-text="@L["ProcessingWithThreeDot"]">
+                                @if (provider.Icon != null)
+                                {
+                                    <i class="@provider.Icon"></i>
+                                }
+                                <span>@provider.DisplayName</span>
+                            </button>
+                        }
+                    </div>
+                </form>
+            }
+
+            @if (Model.EnableLocalLogin)
+            {
+                @if (Model.VisibleExternalProviders.Any())
+                {
+                    <!--begin::Separator-->
+                    <div class="separator separator-content my-14">
+                        <span class="w-125px text-gray-500 fw-semibold fs-7">Or with email</span>
+                    </div>
+                    <!--end::Separator-->
+                }
+
+                <form method="post" novalidate="novalidate" id="kt_sign_in_form">
+                    @if (Model.UseCaptcha)
+                    {
+                        <input class="mb-3" data-captcha="true" type="hidden" name="@RecaptchaValidatorBase.RecaptchaResponseKey" id="@RecaptchaValidatorBase.RecaptchaResponseKey"/>
+                    }
+
+                    <!--begin::Input group=-->
+                    <div class="fv-row mb-8">
+                        <!--begin::Email-->
+                        <input asp-for="LoginInput.UserNameOrEmailAddress" class="form-control bg-transparent" autocomplete="off" placeholder="Email"/>
+                        <span asp-validation-for="LoginInput.UserNameOrEmailAddress" class="text-danger"></span>
+                        <!--end::Email-->
+                    </div>
+                    <!--end::Input group=-->
+                    <div class="fv-row mb-3">
+                        <!--begin::Password-->
+                        <input type="password" class="form-control bg-transparent" placeholder="Password" autocomplete="new-password" maxlength="@IdentityUserConsts.MaxPasswordLength" asp-for="LoginInput.Password"/>
+                        <span asp-validation-for="LoginInput.Password"></span>
+                        <!--end::Password-->
+                    </div>
+                    <!--end::Input group=-->
+                    <!--begin::Wrapper-->
+                    <div class="d-flex flex-stack flex-wrap gap-3 fs-base fw-semibold mb-8">
+                        <div></div>
+                        <!--begin::Link-->
+                        <a href="@Url.Page("./ForgotPassword", new { returnUrl = Model.ReturnUrl, returnUrlHash = Model.ReturnUrlHash })" class="link-primary">@L["ForgotPassword"]</a>
+                        <!--end::Link-->
+                    </div>
+                    <!--end::Wrapper-->
+                    <!--begin::Submit button-->
+                    <div class="d-grid mb-10">
+                        <abp-button id="kt_sign_in_submit" type="submit" button-type="Primary" name="Action" value="Login" class="btn-lg mt-3">
+                            <span class="indicator-label">
+                                @L["Login"]
+
+                            </span>
+                            <!--end::Indicator label-->
+                            <!--begin::Indicator progress-->
+                            <span class="indicator-progress">
+                                Please wait...
+                                <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                            </span>
+                        </abp-button>
+                    </div>
+
+                    @if (reCaptchaVersion == 2)
+                    {
+                        <script>
+                        recaptchaCallback = function (token) {
+                            $('form button[type=submit]').removeAttr("disabled");
+                            $('#@RecaptchaValidatorBase.RecaptchaResponseKey').val(token)
+                        };
+                    </script>
+                        <div class="mb-3">
+                            <recaptcha-div-v2 callback="recaptchaCallback"/>
+                        </div>
+                    }
+                </form>
+            }
+            <!--end::Submit button-->
+            @if (await SettingProvider.IsTrueAsync(AccountSettingNames.IsSelfRegistrationEnabled))
+            {
+                <div class="text-gray-500 text-center fw-semibold fs-6">
+                    @L["NotAMemberYet"]
+                    <a href="@Url.Page("./Register", new { returnUrl = Model.ReturnUrl, returnUrlHash = Model.ReturnUrlHash })" class="link-primary">@L["Register"]</a>
+                </div>
+            }
+        </div>
+        <!--end::Form-->
+    </div>
+    <!--end::Wrapper-->
+</div>

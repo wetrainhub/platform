@@ -106,5 +106,6 @@ public class PlatformDbContext :
         //});
             builder.ConfigureCrm();
             builder.ConfigureTraining();
+            builder.ConfigureOpenIddict();
         }
 }

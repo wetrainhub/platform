@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <Import Project="..\..\common.props" />
 
@@ -8,13 +8,15 @@
     <RootNamespace>Wth.Crm</RootNamespace>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\src\Wth.Crm.Application\Wth.Crm.Application.csproj" />
-    <ProjectReference Include="..\Wth.Crm.Domain.Tests\Wth.Crm.Domain.Tests.csproj" />
-  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\WTH.Crm.Application\WTH.Crm.Application.csproj" />
+    <ProjectReference Include="..\Wth.Crm.Domain.Tests\Wth.Crm.Domain.Tests.csproj" />
   </ItemGroup>
 
 </Project>

@@ -68,6 +68,7 @@ using Wth.Crm.Web;
 using WTH.Theme.Wetrainhub;
 using WTH.Theme.Wetrainhub.Bundling;
 using WTH.Training.Web;
+using Volo.Abp.Account;
 
 namespace WTH.Platform.Web;
 
@@ -99,6 +100,8 @@ namespace WTH.Platform.Web;
     typeof(WetrainhubThemeModule))]
 [DependsOn(typeof(CrmWebModule))]
     [DependsOn(typeof(TrainingWebModule))]
+    [DependsOn(typeof(AbpAccountPublicWebModule))]
+    [DependsOn(typeof(AbpAccountPublicWebIdentityServerModule))]
     public class PlatformWebModule : AbpModule
 {
     public override void PreConfigureServices(ServiceConfigurationContext context)

@@ -38,6 +38,7 @@ namespace WTH.Platform;
 )]
     [DependsOn(typeof(CrmApplicationContractsModule))]
     [DependsOn(typeof(TrainingApplicationContractsModule))]
+    [DependsOn(typeof(AbpAccountSharedApplicationContractsModule))]
     public class PlatformApplicationContractsModule : AbpModule
 {
     public override void PreConfigureServices(ServiceConfigurationContext context)

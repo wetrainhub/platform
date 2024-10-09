@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <Import Project="..\..\common.props" />
 
@@ -16,7 +16,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
     <PackageReference Include="HtmlAgilityPack" Version="1.11.54" />
-    <PackageReference Include="Volo.Abp.AspNetCore.TestBase" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.AspNetCore.TestBase" Version="8.3.1" />
     <ProjectReference Include="..\WTH.Platform.Application.Tests\WTH.Platform.Application.Tests.csproj" />
     <ProjectReference Include="..\..\src\WTH.Platform.Web\WTH.Platform.Web.csproj" />
     <ProjectReference Include="..\WTH.Platform.EntityFrameworkCore.Tests\WTH.Platform.EntityFrameworkCore.Tests.csproj" />

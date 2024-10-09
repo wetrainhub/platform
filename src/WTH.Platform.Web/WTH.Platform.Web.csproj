@@ -50,7 +50,11 @@
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Twitter" Version="8.0.4" />
     <PackageReference Include="Microsoft.AspNetCore.DataProtection.StackExchangeRedis" Version="8.0.4" />
     <PackageReference Include="DistributedLock.Redis" Version="1.0.2" />
-    <PackageReference Include="Volo.Abp.EventBus.Azure" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.Account.Pro.Admin.Web" Version="8.3.1" />
+    <PackageReference Include="Volo.Abp.Account.Pro.Public.Web" Version="8.3.1" />
+    <PackageReference Include="Volo.Abp.Account.Pro.Public.Web.IdentityServer" Version="8.3.1" />
+    <PackageReference Include="Volo.Abp.Account.Pro.Public.Web.OpenIddict" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.EventBus.Azure" Version="8.3.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -63,33 +67,31 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.Caching.StackExchangeRedis" Version="8.3.0" />
-    <PackageReference Include="Volo.Abp.DistributedLocking" Version="8.3.0" />
-    <PackageReference Include="Volo.Abp.Autofac" Version="8.3.0" />
-    <PackageReference Include="Volo.Abp.AspNetCore.Serilog" Version="8.3.0" />
-    <PackageReference Include="Volo.Abp.AspNetCore.Authentication.JwtBearer" Version="8.3.0" />
-    <PackageReference Include="Volo.Abp.Swashbuckle" Version="8.3.0" />
-    <PackageReference Include="Volo.Abp.FeatureManagement.Web" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.Caching.StackExchangeRedis" Version="8.3.1" />
+    <PackageReference Include="Volo.Abp.DistributedLocking" Version="8.3.1" />
+    <PackageReference Include="Volo.Abp.Autofac" Version="8.3.1" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Serilog" Version="8.3.1" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Authentication.JwtBearer" Version="8.3.1" />
+    <PackageReference Include="Volo.Abp.Swashbuckle" Version="8.3.1" />
+    <PackageReference Include="Volo.Abp.FeatureManagement.Web" Version="8.3.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.Account.Pro.Admin.Web" Version="8.3.0" />
-    <PackageReference Include="Volo.Abp.Account.Pro.Public.Web.OpenIddict" Version="8.3.0" />
-    <PackageReference Include="Volo.Abp.Identity.Pro.Web" Version="8.3.0" />
-    <PackageReference Include="Volo.Abp.AuditLogging.Web" Version="8.3.0" />
-    <PackageReference Include="Volo.Abp.OpenIddict.Pro.Web" Version="8.3.0" />
-    <PackageReference Include="Volo.Abp.LanguageManagement.Web" Version="8.3.0" />
-    <PackageReference Include="Volo.FileManagement.Web" Version="8.3.0" />
-    <PackageReference Include="Volo.Saas.Host.Web" Version="8.3.0" />
-    <PackageReference Include="Volo.Chat.Web" Version="8.3.0" />
-    <PackageReference Include="Volo.Chat.SignalR" Version="8.3.0" />
-    <PackageReference Include="Volo.Abp.TextTemplateManagement.Web" Version="8.3.0" />
-    <PackageReference Include="Volo.Abp.Gdpr.Web" Version="8.3.0" />
-    <PackageReference Include="Volo.CmsKit.Pro.Admin.Web" Version="8.3.0" />
+    <PackageReference Include="Volo.Abp.Identity.Pro.Web" Version="8.3.1" />
+    <PackageReference Include="Volo.Abp.AuditLogging.Web" Version="8.3.1" />
+    <PackageReference Include="Volo.Abp.OpenIddict.Pro.Web" Version="8.3.1" />
+    <PackageReference Include="Volo.Abp.LanguageManagement.Web" Version="8.3.1" />
+    <PackageReference Include="Volo.FileManagement.Web" Version="8.3.1" />
+    <PackageReference Include="Volo.Saas.Host.Web" Version="8.3.1" />
+    <PackageReference Include="Volo.Chat.Web" Version="8.3.1" />
+    <PackageReference Include="Volo.Chat.SignalR" Version="8.3.1" />
+    <PackageReference Include="Volo.Abp.TextTemplateManagement.Web" Version="8.3.1" />
+    <PackageReference Include="Volo.Abp.Gdpr.Web" Version="8.3.1" />
+    <PackageReference Include="Volo.CmsKit.Pro.Admin.Web" Version="8.3.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.Studio.Client.AspNetCore" Version="0.7.9" />
+    <PackageReference Include="Volo.Abp.Studio.Client.AspNetCore" Version="0.8.4" />
   </ItemGroup>
 
   <ItemGroup>

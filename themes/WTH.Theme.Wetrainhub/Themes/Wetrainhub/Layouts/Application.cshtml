@@ -1,35 +1,23 @@
 ﻿@using System.Globalization
 @using Volo.Abp.AspNetCore.Mvc.UI.Bundling.TagHelpers
 @using Volo.Abp.AspNetCore.Mvc.UI.Components.LayoutHook
-@using Volo.Abp.AspNetCore.Mvc.UI.Layout
 @using WTH.Theme.Wetrainhub.Bundling
 @using Volo.Abp.AspNetCore.Mvc.UI.Theming
 @using Volo.Abp.AspNetCore.Mvc.UI.Widgets.Components.WidgetScripts
 @using Volo.Abp.AspNetCore.Mvc.UI.Widgets.Components.WidgetStyles
 @using Volo.Abp.Ui.Branding
 @using Volo.Abp.Ui.LayoutHooks
+@using WTH.Theme.Wetrainhub
+@using WTH.Theme.Wetrainhub.Layout
 @using WTH.Theme.Wetrainhub.Themes.Wetrainhub.Components.ContentTitle
 @using WTH.Theme.Wetrainhub.Themes.Wetrainhub.Components.Footer
 @using WTH.Theme.Wetrainhub.Themes.Wetrainhub.Components.Header
-@using WTH.Theme.Wetrainhub.Themes.Wetrainhub.Components.MainNavbar
 @using WTH.Theme.Wetrainhub.Themes.Wetrainhub.Components.PageAlerts
-@inject IBrandingProvider BrandingProvider
-@inject IPageLayout PageLayout
+@inject IThemeBrandingProvider BrandingProvider
+@inject IThemePageLayout PageLayout
 @{
     Layout = null;
-    var containerClass = ViewBag.FluidLayout == true ? "container-fluid" : "container"; //TODO: Better and type-safe options
-
-    var pageTitle = ViewBag.Title == null ? BrandingProvider.AppName : ViewBag.Title; //TODO: Discard to get from Title
-
-    if (PageLayout.Content.Title != null)
-    {
-        if (!string.IsNullOrWhiteSpace(pageTitle))
-        {
-            pageTitle = " | " + pageTitle;
-        }
-
-        pageTitle = PageLayout.Content.Title + pageTitle;
-    }
+    var pageTitle = $"{BrandingProvider.AppName} | {PageLayout.Meta.Title}";
 }
 
 <!DOCTYPE html>
@@ -80,7 +68,7 @@
     </script>
 
 </head>
-<body id="kt_body" class="header-extended header-fixed header-tablet-and-mobile-fixed" >
+<body id="kt_body" class="header-extended header-fixed header-tablet-and-mobile-fixed">
 @await Component.InvokeLayoutHookAsync(LayoutHooks.Body.First, StandardLayouts.Application)
 
 <div class="d-flex flex-column flex-root">

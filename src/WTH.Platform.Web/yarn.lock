@@ -787,13 +787,6 @@
   dependencies:
     "@abp/aspnetcore.mvc.ui.theme.shared" "~8.3.0"
 
-"@volo/abp.aspnetcore.mvc.ui.theme.leptonx@~3.3.0":
-  version "3.3.0"
-  resolved "https://registry.yarnpkg.com/@volo/abp.aspnetcore.mvc.ui.theme.leptonx/-/abp.aspnetcore.mvc.ui.theme.leptonx-3.3.0.tgz#52b3dfac85df235f107ad2be53069bb92116fe3e"
-  integrity sha512-/4Nc+2th8x1ey/WaLqWxkpZdhYGSwiI4qwPVhu28e+erHzwLIWoH/IR9hThltjEaR7o3LFEFs3S6DPXDwcVkfg==
-  dependencies:
-    "@volo/abp.aspnetcore.mvc.ui.theme.commercial" "~8.3.0"
-
 "@volo/account@~8.3.0":
   version "8.3.0"
   resolved "https://registry.yarnpkg.com/@volo/account/-/account-8.3.0.tgz#7663f37ffd6844c7a0d6818b5984262d1ec82b3f"

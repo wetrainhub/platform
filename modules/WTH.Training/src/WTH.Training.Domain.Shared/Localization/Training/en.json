@@ -2,11 +2,13 @@
   "Culture": "en",
   "Texts": {
     "Menu:Training": "Training",
-    "Menu:Training:Awards": "Awards",
-    "Menu:Training:Awards:Types"  : "Types",
-    "Menu:Training:Awards:Organisations": "Organisations",
+    "Menu:Training:Certification": "Certification",
+    "Menu:Training:Certification:Awards": "Awards",
+    "Menu:Training:Certification:Types"  : "Types",
+    "Menu:Training:Certification:Organisations": "Organisations",
     
     "Menu:Training:Reminders": "Reminders",
+    "Menu:Training:Reminders:Logs": "Logs",
     "Menu:Training:Reminders:Templates": "Templates",
     
     

@@ -15,30 +15,21 @@ using Volo.Abp;
 using Volo.Abp.Studio;
 using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.AspNetCore.Mvc.Localization;
-using Volo.Abp.AspNetCore.Mvc.UI;
-using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared;
-using Volo.Abp.AspNetCore.Mvc.UI.Theme.LeptonX;
-using Volo.Abp.AspNetCore.Mvc.UI.Theme.LeptonX.Bundling;
-using Volo.Abp.LeptonX.Shared;
 using Volo.Abp.Autofac;
 using Volo.Abp.AutoMapper;
 using Volo.Abp.Modularity;
 using Volo.Abp.PermissionManagement;
-using Volo.Abp.PermissionManagement.Web;
 using Volo.Abp.UI.Navigation.Urls;
-using Volo.Abp.UI;
 using Volo.Abp.UI.Navigation;
 using Volo.Abp.VirtualFileSystem;
 using Volo.Abp.Identity.Web;
 using OpenIddict.Server.AspNetCore;
 using OpenIddict.Validation.AspNetCore;
-using Volo.Abp.AspNetCore.Mvc.UI.Theme.Commercial;
 using WTH.Platform.Web.HealthChecks;
 using Volo.Abp.Account.Admin.Web;
 using Volo.Abp.Account.Public.Web;
 using Volo.Abp.Account.Public.Web.ExternalProviders;
-using Volo.Abp.Account.Pro.Public.Web.Shared;
 using Volo.Abp.AuditLogging.Web;
 using Volo.Abp.LanguageManagement;
 using Volo.FileManagement.Web;
@@ -51,7 +42,6 @@ using Volo.Chat;
 using Volo.Abp.OpenIddict.Pro.Web;
 using Volo.CmsKit.Pro.Admin.Web;
 using System;
-using System.Security.Cryptography.X509Certificates;
 using Microsoft.AspNetCore.DataProtection;
 using StackExchange.Redis;
 using Volo.Abp.Caching;
@@ -72,11 +62,11 @@ using Volo.Abp.Identity;
 using Volo.Abp.Swashbuckle;
 using Volo.Abp.OpenIddict;
 using Volo.Abp.Security.Claims;
-using Volo.Abp.SettingManagement.Web;
 using Volo.Abp.Studio.Client.AspNetCore;
 using Volo.Abp.EventBus.Azure;
 using Wth.Crm.Web;
 using WTH.Theme.Wetrainhub;
+using WTH.Theme.Wetrainhub.Bundling;
 using WTH.Training.Web;
 
 namespace WTH.Platform.Web;
@@ -187,7 +177,6 @@ namespace WTH.Platform.Web;
         ConfigureNavigationServices();
         ConfigureAutoApiControllers();
         ConfigureSwaggerServices(context.Services);
-        ConfigureTheme();
 
         Configure<PermissionManagementOptions>(options => { options.IsDynamicPermissionStoreEnabled = true; });
     }
@@ -202,13 +191,6 @@ namespace WTH.Platform.Web;
         });
     }
 
-    private void ConfigureTheme()
-    {
-        Configure<LeptonXThemeOptions>(options => { options.DefaultStyle = LeptonXStyleNames.System; });
-
-        Configure<LeptonXThemeMvcOptions>(options => { options.ApplicationLayout = LeptonXMvcLayouts.SideMenu; });
-    }
-
     private void ConfigureHealthChecks(ServiceConfigurationContext context)
     {
         context.Services.AddPlatformHealthChecks();
@@ -219,7 +201,7 @@ namespace WTH.Platform.Web;
         Configure<AbpBundlingOptions>(options =>
         {
             options.StyleBundles.Configure(
-                LeptonXThemeBundles.Styles.Global,
+                WetrainhubThemeBundles.Styles.Global,
                 bundle => { bundle.AddFiles("/global-styles.css"); }
             );
         });

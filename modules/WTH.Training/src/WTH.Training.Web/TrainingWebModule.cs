@@ -8,6 +8,7 @@ using Volo.Abp.AutoMapper;
 using Volo.Abp.Modularity;
 using Volo.Abp.UI.Navigation;
 using Volo.Abp.VirtualFileSystem;
+using WTH.Theme.Wetrainhub;
 using WTH.Training.Permissions;
 
 namespace WTH.Training.Web;
@@ -15,7 +16,8 @@ namespace WTH.Training.Web;
 [DependsOn(
     typeof(TrainingApplicationContractsModule),
     typeof(AbpAspNetCoreMvcUiThemeSharedModule),
-    typeof(AbpAutoMapperModule)
+    typeof(AbpAutoMapperModule),
+    typeof(WetrainhubThemeModule)
     )]
 public class TrainingWebModule : AbpModule
 {

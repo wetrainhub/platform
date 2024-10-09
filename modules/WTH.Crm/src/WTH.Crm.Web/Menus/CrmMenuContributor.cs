@@ -17,7 +17,35 @@ public class CrmMenuContributor : IMenuContributor
         }
 
         var moduleMenu = AddModuleMenuItem(context); //Do not delete `moduleMenu` variable as it will be used by ABP Suite!
+        
+        AddCompanies(context, moduleMenu);
+        AddEmployees(context, moduleMenu);
     }
+
+    private void AddEmployees(MenuConfigurationContext context, ApplicationMenuItem moduleMenu)
+    {
+        var l = context.GetLocalizer<CrmResource>();
+        
+        var employeesMenuItem = new ApplicationMenuItem(
+            CrmMenus.Employees,
+            displayName: l["Menu:Crm:Employees"],
+            "~/Crm/Employees",
+            icon: "fa-users");
+        
+        moduleMenu.Items.Add(employeesMenuItem);
+    }
+
+    private void AddCompanies(MenuConfigurationContext context, ApplicationMenuItem moduleMenu)
+    {
+        var l = context.GetLocalizer<CrmResource>();
+        
+        var employeesMenuItem = new ApplicationMenuItem(
+            CrmMenus.Companies,
+            displayName: l["Menu:Crm:Companies"],
+            "~/Crm/Companies",
+            icon: "fa-building");
+        
+        moduleMenu.Items.Add(employeesMenuItem);    }
 
     private static ApplicationMenuItem AddModuleMenuItem(MenuConfigurationContext context)
     {

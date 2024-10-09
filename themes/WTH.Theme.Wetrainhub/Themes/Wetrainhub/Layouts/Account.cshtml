@@ -15,100 +15,224 @@
 @using Volo.Abp.Localization
 @using Volo.Abp.Ui.Branding
 @using Volo.Abp.Ui.LayoutHooks
+@using WTH.Theme.Wetrainhub
+@using WTH.Theme.Wetrainhub.Layout
 @using WTH.Theme.Wetrainhub.Themes.Wetrainhub.Components.PageAlerts
 
-@using WTH.Theme.Wetrainhub.Themes.Wetrainhub.Components.MainNavbar
-@inject IBrandingProvider BrandingProvider
+@inject IThemeBrandingProvider BrandingProvider
 @inject IOptions<AbpMultiTenancyOptions> MultiTenancyOptions
 @inject ICurrentTenant CurrentTenant
 @inject IStringLocalizer<AbpUiMultiTenancyResource> MultiTenancyStringLocalizer
 @inject ITenantResolveResultAccessor TenantResolveResultAccessor
+@inject IThemePageLayout PageLayout
 
 @{
     Layout = null;
-    var containerClass = ViewBag.FluidLayout == true ? "container-fluid" : "container"; //TODO: Better and type-safe options
-    var rtl = CultureHelper.IsRtl ? "rtl" : string.Empty;
+    var pageTitle = $"{BrandingProvider.AppName} | {PageLayout.Meta.Title}";
 }
 
 <!DOCTYPE html>
 
-<html lang="@CultureInfo.CurrentCulture.Name" dir="@rtl">
-<head>
-    @await Component.InvokeLayoutHookAsync(LayoutHooks.Head.First, StandardLayouts.Account)
+<html lang="@CultureInfo.CurrentCulture.Name" data-bs-theme="light">
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<head>
+    @await Component.InvokeLayoutHookAsync(LayoutHooks.Head.First, StandardLayouts.Application)
+
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <title>@(ViewBag.Title == null ? BrandingProvider.AppName : ViewBag.Title)</title>
+    <link rel="apple-touch-icon" sizes="57x57" href="/themes/wetrainhub/img/favicons/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/themes/wetrainhub/img/favicons/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/themes/wetrainhub/img/favicons/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/themes/wetrainhub/img/favicons/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/themes/wetrainhub/img/favicons/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/themes/wetrainhub/img/favicons/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/themes/wetrainhub/img/favicons/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/themes/wetrainhub/img/favicons/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/themes/wetrainhub/img/favicons/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/themes/wetrainhub/img/favicons/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/themes/wetrainhub/img/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/themes/wetrainhub/img/favicons/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/themes/wetrainhub/img/favicons/favicon-16x16.png">
+    <link rel="manifest" href="/themes/wetrainhub/img/favicons/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/themes/vuexy/img/favicons/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
 
-    @if (ViewBag.Description != null)
-    {
-        <meta name="description" content="@(ViewBag.Description as string)" />
-    }
-    <abp-style-bundle name="@WetrainhubThemeBundles.Styles.Global" />
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700"/>
 
-    @await RenderSectionAsync("styles", false)
+    <title>@pageTitle</title>
+
+    <abp-style-bundle name="@WetrainhubThemeBundles.Styles.Global"/>
 
     @await Component.InvokeAsync(typeof(WidgetStylesViewComponent))
 
-    @await Component.InvokeLayoutHookAsync(LayoutHooks.Head.Last, StandardLayouts.Account)
+    @await RenderSectionAsync("styles", false)
+
+    @await Component.InvokeLayoutHookAsync(LayoutHooks.Head.Last, StandardLayouts.Application)
+    <script>
+        if (window.top != window.self) { window.top.location.replace(window.self.location.href); }
+    </script>
+
 </head>
-<body class="abp-account-layout @rtl">
-    @await Component.InvokeLayoutHookAsync(LayoutHooks.Body.First, StandardLayouts.Account)
+<body id="kt_body" class="auth-bg">
+@await Component.InvokeLayoutHookAsync(LayoutHooks.Body.First, StandardLayouts.Account)
 
-    @(await Component.InvokeAsync<MainNavbarViewComponent>())
 
-    <div class="@containerClass">
-        <abp-row>
-            <abp-column class="col mx-auto" style="max-width: 440px">
-                @if (MultiTenancyOptions.Value.IsEnabled &&
-                  (TenantResolveResultAccessor.Result?.AppliedResolvers?.Contains(CookieTenantResolveContributor.ContributorName) == true ||
-                   TenantResolveResultAccessor.Result?.AppliedResolvers?.Contains(QueryStringTenantResolveContributor.ContributorName) == true))
-                {
-                    <div class="card shadow-sm rounded mb-3">
-                        <div class="card-body px-5">
-                            <div class="row">
-                                <div class="col">
-                                    <span style="font-size: .8em;" class="text-uppercase text-muted">@MultiTenancyStringLocalizer["Tenant"]</span><br />
-                                    <h6 class="m-0 d-inline-block">
-                                        @if (CurrentTenant.Id == null)
-                                        {
-                                            <span>
-                                                @MultiTenancyStringLocalizer["NotSelected"]
-                                            </span>
-                                        }
-                                        else
-                                        {
-                                            <strong>@(CurrentTenant.Name ?? CurrentTenant.Id.Value.ToString())</strong>
-                                        }
-                                    </h6>
-                                </div>
-                                <div class="col-auto">
-                                    <a id="AbpTenantSwitchLink" href="javascript:;" class="btn btn-sm mt-3 btn-outline-primary">@MultiTenancyStringLocalizer["Switch"]</a>
+<div class="d-flex flex-column flex-root">
+    <div class="d-flex flex-column flex-lg-row flex-column-fluid">
+        <div class="d-flex flex-column flex-lg-row-fluid w-lg-50 p-10 order-2 order-lg-1">
+
+
+            <div class="d-flex flex-center flex-column flex-lg-row-fluid">
+                <!--begin::Wrapper-->
+                <div class="w-lg-500px p-10">
+                    
+                    @if (MultiTenancyOptions.Value.IsEnabled &&
+                         (TenantResolveResultAccessor.Result?.AppliedResolvers?.Contains(CookieTenantResolveContributor.ContributorName) == true ||
+                          TenantResolveResultAccessor.Result?.AppliedResolvers?.Contains(QueryStringTenantResolveContributor.ContributorName) == true))
+                    {
+                        <div class="card shadow-sm rounded mb-3">
+                            <div class="card-body px-5">
+                                <div class="row">
+                                    <div class="col">
+                                        <span style="font-size: .8em;" class="text-uppercase text-muted">@MultiTenancyStringLocalizer["Tenant"]</span><br/>
+                                        <h6 class="m-0 d-inline-block">
+                                            @if (CurrentTenant.Id == null)
+                                            {
+                                                <span>
+                                                    @MultiTenancyStringLocalizer["NotSelected"]
+                                                </span>
+                                            }
+                                            else
+                                            {
+                                                <strong>@(CurrentTenant.Name ?? CurrentTenant.Id.Value.ToString())</strong>
+                                            }
+                                        </h6>
+                                    </div>
+                                    <div class="col-auto">
+                                        <a id="AbpTenantSwitchLink" href="javascript:;" class="btn btn-sm mt-3 btn-outline-primary">@MultiTenancyStringLocalizer["Switch"]</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                    }
+                    @(await Component.InvokeAsync<PageAlertsViewComponent>())
+                    @await Component.InvokeLayoutHookAsync(LayoutHooks.PageContent.First, StandardLayouts.Account)
+                    @RenderBody()
+                    @await Component.InvokeLayoutHookAsync(LayoutHooks.PageContent.Last, StandardLayouts.Account)
+
+                </div>
+            </div>
+
+
+            <div class="w-lg-500px d-flex flex-stack px-10 mx-auto">
+                <!--begin::Languages-->
+                <div class="me-10">
+                    <!--begin::Toggle-->
+                    <button class="btn btn-flex btn-link btn-color-gray-700 btn-active-color-primary rotate fs-base" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-start" data-kt-menu-offset="0px, 0px">
+                        <img data-kt-element="current-lang-flag" class="w-20px h-20px rounded me-3" src="assets/media/flags/united-states.svg" alt=""/>
+                        <span data-kt-element="current-lang-name" class="me-1">English</span>
+                        <span class="d-flex flex-center rotate-180">
+                            <i class="ki-duotone ki-down fs-5 text-muted m-0"></i>
+                        </span>
+                    </button>
+                    <!--end::Toggle-->
+                    <!--begin::Menu-->
+                    <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg-light-primary fw-semibold w-200px py-4 fs-7" data-kt-menu="true" id="kt_auth_lang_menu">
+                        <!--begin::Menu item-->
+                        <div class="menu-item px-3">
+                            <a href="#" class="menu-link d-flex px-5" data-kt-lang="English">
+                                <span class="symbol symbol-20px me-4">
+                                    <img data-kt-element="lang-flag" class="rounded-1" src="assets/media/flags/united-states.svg" alt=""/>
+                                </span>
+                                <span data-kt-element="lang-name">English</span>
+                            </a>
+                        </div>
+                        <!--end::Menu item-->
+                        <!--begin::Menu item-->
+                        <div class="menu-item px-3">
+                            <a href="#" class="menu-link d-flex px-5" data-kt-lang="Spanish">
+                                <span class="symbol symbol-20px me-4">
+                                    <img data-kt-element="lang-flag" class="rounded-1" src="assets/media/flags/spain.svg" alt=""/>
+                                </span>
+                                <span data-kt-element="lang-name">Spanish</span>
+                            </a>
+                        </div>
+                        <!--end::Menu item-->
+                        <!--begin::Menu item-->
+                        <div class="menu-item px-3">
+                            <a href="#" class="menu-link d-flex px-5" data-kt-lang="German">
+                                <span class="symbol symbol-20px me-4">
+                                    <img data-kt-element="lang-flag" class="rounded-1" src="assets/media/flags/germany.svg" alt=""/>
+                                </span>
+                                <span data-kt-element="lang-name">German</span>
+                            </a>
+                        </div>
+                        <!--end::Menu item-->
+                        <!--begin::Menu item-->
+                        <div class="menu-item px-3">
+                            <a href="#" class="menu-link d-flex px-5" data-kt-lang="Japanese">
+                                <span class="symbol symbol-20px me-4">
+                                    <img data-kt-element="lang-flag" class="rounded-1" src="assets/media/flags/japan.svg" alt=""/>
+                                </span>
+                                <span data-kt-element="lang-name">Japanese</span>
+                            </a>
+                        </div>
+                        <!--end::Menu item-->
+                        <!--begin::Menu item-->
+                        <div class="menu-item px-3">
+                            <a href="#" class="menu-link d-flex px-5" data-kt-lang="French">
+                                <span class="symbol symbol-20px me-4">
+                                    <img data-kt-element="lang-flag" class="rounded-1" src="assets/media/flags/france.svg" alt=""/>
+                                </span>
+                                <span data-kt-element="lang-name">French</span>
+                            </a>
+                        </div>
+                        <!--end::Menu item-->
                     </div>
-                }
-                @(await Component.InvokeAsync<PageAlertsViewComponent>())
-                @await Component.InvokeLayoutHookAsync(LayoutHooks.PageContent.First, StandardLayouts.Account)
-                @RenderBody()
-                @await Component.InvokeLayoutHookAsync(LayoutHooks.PageContent.Last, StandardLayouts.Account)
-            </abp-column>
-        </abp-row>
+                    <!--end::Menu-->
+                </div>
+                <!--end::Languages-->
+                <!--begin::Links-->
+                <div class="d-flex fw-semibold text-primary fs-base gap-5">
+                    <a href="pages/team.html" target="_blank">Terms</a>
+                    <a href="pages/pricing/column.html" target="_blank">Plans</a>
+                    <a href="pages/contact.html" target="_blank">Contact Us</a>
+                </div>
+                <!--end::Links-->
+            </div>
+
+
+        </div>
+
+        <div class="d-flex flex-lg-row-fluid w-lg-50 bgi-size-cover bgi-position-center order-1 order-lg-2" style="background-image: url(@BrandingProvider.LoginBackgroundUrl)">
+            <div class="d-flex flex-column flex-center py-7 py-lg-15 px-5 px-md-15 w-100">
+                <a href="/" class="mb-0 mb-lg-12">
+                    <img alt="Logo" src="@BrandingProvider.LoginLogoUrl" class="h-60px h-lg-150px" />
+                </a>
+                <img class="d-none d-lg-block mx-auto w-275px w-md-50 w-xl-500px mb-10 mb-lg-20" src="/themes/wetrainhub/media/misc/auth-screens.png" alt="" />
+            </div>
+        </div>
+
+
     </div>
+</div>
 
-    <abp-script-bundle name="@WetrainhubThemeBundles.Scripts.Global" />
+<abp-script-bundle name="@WetrainhubThemeBundles.Scripts.Global"/>
 
-    <script src="~/Abp/ApplicationLocalizationScript?cultureName=@CultureInfo.CurrentUICulture.Name"></script>
-    <script src="~/Abp/ApplicationConfigurationScript"></script>
-    <script src="~/Abp/ServiceProxyScript"></script>
+<script src="~/Abp/ApplicationLocalizationScript?cultureName=@CultureInfo.CurrentUICulture.Name"></script>
+<script src="~/Abp/ApplicationConfigurationScript"></script>
+<script src="~/Abp/ServiceProxyScript"></script>
 
-    @await RenderSectionAsync("scripts", false)
+@await RenderSectionAsync("scripts", false)
 
-    @await Component.InvokeAsync(typeof(WidgetScriptsViewComponent))
+@await Component.InvokeAsync(typeof(WidgetScriptsViewComponent))
 
-    @await Component.InvokeLayoutHookAsync(LayoutHooks.Body.Last, StandardLayouts.Account)
+@await Component.InvokeLayoutHookAsync(LayoutHooks.Body.Last, StandardLayouts.Account)
 </body>
 </html>

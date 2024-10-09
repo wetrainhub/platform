@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
 using Volo.Abp.AspNetCore.Mvc.UI.Layout;
 using WTH.Platform.Web.Menus;
 using WTH.Theme.Wetrainhub.Layout;

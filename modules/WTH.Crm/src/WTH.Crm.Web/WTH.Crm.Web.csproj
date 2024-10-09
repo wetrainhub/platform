@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\themes\WTH.Theme.Wetrainhub\WTH.Theme.Wetrainhub.csproj" />
     <ProjectReference Include="..\Wth.Crm.Application.Contracts\Wth.Crm.Application.Contracts.csproj" />
   </ItemGroup>
 

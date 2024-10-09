@@ -73,10 +73,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.LeptonX" Version="3.3.0" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Volo.Abp.Account.Pro.Admin.Web" Version="8.3.0" />
     <PackageReference Include="Volo.Abp.Account.Pro.Public.Web.OpenIddict" Version="8.3.0" />
     <PackageReference Include="Volo.Abp.Identity.Pro.Web" Version="8.3.0" />
@@ -94,6 +90,16 @@
 
   <ItemGroup>
     <PackageReference Include="Volo.Abp.Studio.Client.AspNetCore" Version="0.7.9" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Themes\LeptonX\Layouts\Account\_Footer.cshtml" />
+    <_ContentIncludedByDefault Remove="Themes\LeptonX\Layouts\Application\_Footer.cshtml" />
+    <_ContentIncludedByDefault Remove="Themes\_ViewImports.cshtml" />
+    <_ContentIncludedByDefault Remove="wwwroot\libs\luxon\luxon.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\libs\luxon\luxon.js.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\libs\luxon\luxon.min.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\libs\luxon\luxon.min.js.map" />
   </ItemGroup>
 
 </Project>

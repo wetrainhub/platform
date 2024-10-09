@@ -9,13 +9,15 @@ using Volo.Abp.Modularity;
 using Volo.Abp.UI.Navigation;
 using Volo.Abp.VirtualFileSystem;
 using Wth.Crm.Permissions;
+using WTH.Theme.Wetrainhub;
 
 namespace Wth.Crm.Web;
 
 [DependsOn(
     typeof(CrmApplicationContractsModule),
     typeof(AbpAspNetCoreMvcUiThemeSharedModule),
-    typeof(AbpAutoMapperModule)
+    typeof(AbpAutoMapperModule),
+    typeof(WetrainhubThemeModule)
     )]
 public class CrmWebModule : AbpModule
 {

@@ -23,6 +23,7 @@
   <ItemGroup>
     <Content Remove="wwwroot\**\*.*" />
     <Content Include="wwwroot\themes\wetrainhub\css\wetrainhub.less" />
+    <Content Include="wwwroot\themes\wetrainhub\js\tag-helpers.js" />
   </ItemGroup>
 
   <ItemGroup>

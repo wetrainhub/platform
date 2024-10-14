@@ -29,7 +29,7 @@
                 var disabled = menuItem.IsDisabled ? "disabled" : string.Empty;
                 var url = string.IsNullOrEmpty(menuItem.Url) ? "#" : Url.Content(menuItem.Url);
 
-                <a class="dropdown-item @cssClass @disabled" href="@url" target="@menuItem.Target" @Html.Raw(elementId)>
+                <a class="dropdown-item @cssClass @disabled" href="@url" target="@menuItem.Target">
                     @if (menuItem.Icon != null)
                     {
                         if (menuItem.Icon.StartsWith("fa"))

@@ -16,5 +16,6 @@ public class WetrainhubThemeGlobalScriptContributor : BundleContributor
 
         context.Files.Add("/themes/wetrainhub/plugins/global/plugins.bundle.js");
         context.Files.Add("/themes/wetrainhub/js/scripts.bundle.js");
+        context.Files.Add("/themes/wetrainhub/js/tag-helpers.js");
     }
 }

@@ -1,16 +1,33 @@
 ﻿@page
 @using Microsoft.Extensions.Localization
 @using Wth.Crm.Localization
+@using Wth.Crm.Web.Pages.Crm
 @model Wth.Crm.Web.Pages.Crm.IndexModel
 @inject IStringLocalizer<CrmResource> L
 
 @{
 }
 
-<ul>
-  @foreach(var company in Model.SearchResults.Items)
-  {
-    <li>@company.Company.Name</li>
-  }</ul>
-  
-  
+
+<wth-container>
+    <wth-container-sidebar>
+        sidebar here
+    </wth-container-sidebar>
+    <wth-container-content>
+        <div class="card">
+            <div class="card-body p-0">
+                <wth-table asp-items="Model.Companies"></wth-table>
+            </div>
+        </div>
+
+        <h3>No table data</h3>
+        <wth-table asp-items="Array.Empty<CompanyListItemViewModel>()"></wth-table>
+
+        <h3>
+            Links
+        </h3>
+        Email <a href="adam@wetrainhub.com">adam@wetrainhub.com</a> | <a href="mailto:adam@wetrainhub.com">adam@wetrainhub.com</a><br/>
+        Telephone <a href="+447123456789">+44 7123 456 789</a> | <a href="tel:+447123456789">+44 7123 456 789</a><br/>
+        Website <a href="https://www.wetrainhub.com">https://www.wetrainhub.com</a><br/>
+    </wth-container-content>
+</wth-container>

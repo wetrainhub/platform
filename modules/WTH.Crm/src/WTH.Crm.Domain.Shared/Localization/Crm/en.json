@@ -5,6 +5,11 @@
     "Menu:Crm:Companies": "Companies",
     "Menu:Crm:Employees": "Employees",
 
+    "Company:Id": "Id",
+    "Company:Name": "Name",
+    "Company:Telephone": "Telephone",
+    "Company:Email": "Email",
+    "Company:Website": "Website",
 
 
     "SamplePageMessage": "A sample page for the Crm module",

@@ -13,9 +13,22 @@ public class IndexModel(ICompaniesAppService companiesAppService) : PageModel
 {
     [BindProperty(SupportsGet = true)] public GetCompaniesInput Filter { get; set; }
 
+    public IEnumerable<CompanyListItemViewModel> Companies { get; set; }
+
     public async Task OnGetAsync()
     {
-        SearchResults = await companiesAppService.GetListAsync(Filter);
+        Companies = new[]
+        {
+            new CompanyListItemViewModel()
+            {
+                Id = Guid.NewGuid(),
+                Name = "GATC",
+                Telephone = "123456789",
+                Email = "gatc@example.com",
+                Website = "https://gasassess.co.uk"
+            }
+        };
+        // SearchResults = await companiesAppService.GetListAsync(Filter);
     }
 
     public PagedResultDto<CompanyWithNavigationPropertiesDto> SearchResults { get; set; }

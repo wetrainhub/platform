@@ -41,4 +41,8 @@
     <None Include="Properties\launchSettings.json" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Pages\Crm\Companies\" />
+  </ItemGroup>
+
 </Project>
